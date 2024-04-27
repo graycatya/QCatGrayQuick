@@ -1,0 +1,549 @@
+MetaInfo {
+    Type {
+        name: "QCatGrayQuick.Qml.QCatGrayQuickStyle"
+        icon: "images/QCatGrayQuickStyle.png"
+
+        ItemLibraryEntry {
+            name: "QCatGrayQuickStyle"
+            category: "QCatGrayQuick - Qml"
+            libraryIcon: "images/QCatGrayQuickStyle.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatAnimation.ImageFlicker"
+        icon: "images/ImageFlicker.png"
+
+        ItemLibraryEntry {
+            name: "ImageFlicker"
+            category: "QCatGrayQuick - CatAnimation"
+            libraryIcon: "images/ImageFlicker.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatAnimation.ImageFlickerGradient"
+        icon: "images/ImageFlickerGradient.png"
+
+        ItemLibraryEntry {
+            name: "ImageFlickerGradient"
+            category: "QCatGrayQuick - CatAnimation"
+            libraryIcon: "images/ImageFlickerGradient.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatAnimation.ImageFlipable"
+        icon: "images/ImageFlipable.png"
+
+        ItemLibraryEntry {
+            name: "ImageFlipable"
+            category: "QCatGrayQuick - CatAnimation"
+            libraryIcon: "images/ImageFlipable.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatAnimation.ImageMove"
+        icon: "images/ImageMove.png"
+
+        ItemLibraryEntry {
+            name: "ImageMove"
+            category: "QCatGrayQuick - CatAnimation"
+            libraryIcon: "images/ImageMove.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatAnimation.ImageScale"
+        icon: "images/ImageScale.png"
+
+        ItemLibraryEntry {
+            name: "ImageScale"
+            category: "QCatGrayQuick - CatAnimation"
+            libraryIcon: "images/ImageScale.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatAnimation.Marquee"
+        icon: "images/Marquee.png"
+
+        ItemLibraryEntry {
+            name: "Marquee"
+            category: "QCatGrayQuick - CatAnimation"
+            libraryIcon: "images/Marquee.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatAnimation.TextOneByOneShow"
+        icon: "images/TextOneByOneShow.png"
+
+        ItemLibraryEntry {
+            name: "TextOneByOneShow"
+            category: "QCatGrayQuick - CatAnimation"
+            libraryIcon: "images/TextOneByOneShow.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatBasics.CatBasicsText"
+        icon: "images/CatBasicsText.png"
+
+        ItemLibraryEntry {
+            name: "CatBasicsText"
+            category: "QCatGrayQuick - CatBasics"
+            libraryIcon: "images/CatBasicsText.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatBasics.CatBasicsToolTip"
+        icon: "images/CatBasicsToolTip.png"
+
+        ItemLibraryEntry {
+            name: "CatBasicsToolTip"
+            category: "QCatGrayQuick - CatBasics"
+            libraryIcon: "images/CatBasicsToolTip.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatBasics.CatRectangle"
+        icon: "images/CatRectangle.png"
+
+        ItemLibraryEntry {
+            name: "CatRectangle"
+            category: "QCatGrayQuick - CatBasics"
+            libraryIcon: "images/CatRectangle.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatBasics.CatTransArea"
+        icon: "images/CatTransArea.png"
+
+        ItemLibraryEntry {
+            name: "CatTransArea"
+            category: "QCatGrayQuick - CatBasics"
+            libraryIcon: "images/CatTransArea.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatButton.CatButton"
+        icon: "images/CatButton.png"
+
+        ItemLibraryEntry {
+            name: "CatButton"
+            category: "QCatGrayQuick - CatButton"
+            libraryIcon: "images/CatButton.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatButton.CatButtonImage"
+        icon: "images/CatButtonImage.png"
+
+        ItemLibraryEntry {
+            name: "CatButtonImage"
+            category: "QCatGrayQuick - CatButton"
+            libraryIcon: "images/CatButtonImage.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGeneral.CatFps"
+        icon: "images/CatFps.png"
+
+        ItemLibraryEntry {
+            name: "CatFps"
+            category: "QCatGrayQuick - CatGeneral"
+            libraryIcon: "images/CatFps.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGeneral.DragSizeWidget"
+        icon: "images/DragSizeWidget.png"
+
+        ItemLibraryEntry {
+            name: "DragSizeWidget"
+            category: "QCatGrayQuick - CatGeneral"
+            libraryIcon: "images/DragSizeWidget.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGeneral.DragWidget"
+        icon: "images/DragWidget.png"
+
+        ItemLibraryEntry {
+            name: "DragWidget"
+            category: "QCatGrayQuick - CatGeneral"
+            libraryIcon: "images/DragWidget.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGeneral.RotateCursor"
+        icon: "images/RotateCursor.png"
+
+        ItemLibraryEntry {
+            name: "RotateCursor"
+            category: "QCatGrayQuick - CatGeneral"
+            libraryIcon: "images/RotateCursor.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGeneral.TemplateWidget"
+        icon: "images/TemplateWidget.png"
+
+        ItemLibraryEntry {
+            name: "TemplateWidget"
+            category: "QCatGrayQuick - CatGeneral"
+            libraryIcon: "images/TemplateWidget.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGraphicalEffects.CatConicalGradient"
+        icon: "images/CatConicalGradient.png"
+
+        ItemLibraryEntry {
+            name: "CatConicalGradient"
+            category: "QCatGrayQuick - CatGraphicalEffects"
+            libraryIcon: "images/CatConicalGradient.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGraphicalEffects.CatDropShadow"
+        icon: "images/CatDropShadow.png"
+
+        ItemLibraryEntry {
+            name: "CatDropShadow"
+            category: "QCatGrayQuick - CatGraphicalEffects"
+            libraryIcon: "images/CatDropShadow.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatGraphicalEffects.CatOpacityMask"
+        icon: "images/CatOpacityMask.png"
+
+        ItemLibraryEntry {
+            name: "CatOpacityMask"
+            category: "QCatGrayQuick - CatGraphicalEffects"
+            libraryIcon: "images/CatOpacityMask.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatImage.CatImageBase"
+        icon: "images/CatImageBase.png"
+
+        ItemLibraryEntry {
+            name: "CatImageBase"
+            category: "QCatGrayQuick - CatImage"
+            libraryIcon: "images/CatImageBase.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatInput.GeneralInput"
+        icon: "images/GeneralInput.png"
+
+        ItemLibraryEntry {
+            name: "GeneralInput"
+            category: "QCatGrayQuick - CatInput"
+            libraryIcon: "images/GeneralInput.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatInput.IpTextInput"
+        icon: "images/IpTextInput.png"
+
+        ItemLibraryEntry {
+            name: "IpTextInput"
+            category: "QCatGrayQuick - CatInput"
+            libraryIcon: "images/IpTextInput.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatCalendar"
+        icon: "images/CatCalendar.png"
+
+        ItemLibraryEntry {
+            name: "CatCalendar"
+            category: "QCatGrayQuick - CatModule"
+            libraryIcon: "images/CatCalendar.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatPopup"
+        icon: "images/CatPopup.png"
+
+        ItemLibraryEntry {
+            name: "CatPopup"
+            category: "QCatGrayQuick - CatModule"
+            libraryIcon: "images/CatPopup.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatSideColumn"
+        icon: "images/CatSideColumn.png"
+
+        ItemLibraryEntry {
+            name: "CatSideColumn"
+            category: "QCatGrayQuick - CatModule"
+            libraryIcon: "images/CatSideColumn.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatSorter"
+        icon: "images/CatSorter.png"
+
+        ItemLibraryEntry {
+            name: "CatSorter"
+            category: "QCatGrayQuick - CatModule"
+            libraryIcon: "images/CatSorter.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CalendarRelyon.CatWeek"
+        icon: "images/CatWeek.png"
+
+        ItemLibraryEntry {
+            name: "CatWeek"
+            category: "QCatGrayQuick - CalendarRelyon"
+            libraryIcon: "images/CatWeek.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CalendarRelyon.DaysItem"
+        icon: "images/DaysItem.png"
+
+        ItemLibraryEntry {
+            name: "DaysItem"
+            category: "QCatGrayQuick - CalendarRelyon"
+            libraryIcon: "images/DaysItem.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CalendarRelyon.NumberItem"
+        icon: "images/NumberItem.png"
+
+        ItemLibraryEntry {
+            name: "NumberItem"
+            category: "QCatGrayQuick - CalendarRelyon"
+            libraryIcon: "images/NumberItem.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatSorter.CatSorterButton"
+        icon: "images/CatSorterButton.png"
+
+        ItemLibraryEntry {
+            name: "CatSorterButton"
+            category: "QCatGrayQuick - CatSorter"
+            libraryIcon: "images/CatSorterButton.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatSorter.SkitPageButton"
+        icon: "images/SkitPageButton.png"
+
+        ItemLibraryEntry {
+            name: "SkitPageButton"
+            category: "QCatGrayQuick - CatSorter"
+            libraryIcon: "images/SkitPageButton.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatSorter.UpdatePageButton"
+        icon: "images/UpdatePageButton.png"
+
+        ItemLibraryEntry {
+            name: "UpdatePageButton"
+            category: "QCatGrayQuick - CatSorter"
+            libraryIcon: "images/UpdatePageButton.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatModule.CatSorter.UpdatePageTextButton"
+        icon: "images/UpdatePageTextButton.png"
+
+        ItemLibraryEntry {
+            name: "UpdatePageTextButton"
+            category: "QCatGrayQuick - CatSorter"
+            libraryIcon: "images/UpdatePageTextButton.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatProgressBar.ArcProgressBar"
+        icon: "images/ArcProgressBar.png"
+
+        ItemLibraryEntry {
+            name: "ArcProgressBar"
+            category: "QCatGrayQuick - CatProgressBar"
+            libraryIcon: "images/ArcProgressBar.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatProgressBar.ArcProgressBarCanvas"
+        icon: "images/ArcProgressBarCanvas.png"
+
+        ItemLibraryEntry {
+            name: "ArcProgressBarCanvas"
+            category: "QCatGrayQuick - CatProgressBar"
+            libraryIcon: "images/ArcProgressBarCanvas.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+    Type {
+        name: "QCatGrayQuick.Qml.CatProgressBar.BarTypeProgressBar"
+        icon: "images/BarTypeProgressBar.png"
+
+        ItemLibraryEntry {
+            name: "BarTypeProgressBar"
+            category: "QCatGrayQuick - CatProgressBar"
+            libraryIcon: "images/BarTypeProgressBar.png"
+            version: "1.0"
+            requiredImport: "QCatGrayQuick"
+            Property { name: "width"; type: "int"; value: 120 }
+            Property { name: "height"; type: "int"; value: 80 }
+        }
+    }
+}
+
