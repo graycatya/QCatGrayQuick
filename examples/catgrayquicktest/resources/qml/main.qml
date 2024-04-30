@@ -9,6 +9,8 @@ Window {
     height: 600
 
     CatButton {
-
+        width: 200
+        height: 100
+        anchors.centerIn: parent
     }
 }
