@@ -1,3 +1,6 @@
 [submodule "lottie-qml"]
 	path = 3rdparty/lottie-qml
 	url = https://github.com/graycatya/lottie-qml.git
+[submodule "libqrencode"]
+	path = 3rdparty/libqrencode
+	url = https://github.com/fukuchi/libqrencode.git

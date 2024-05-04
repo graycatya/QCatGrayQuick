@@ -2,6 +2,9 @@
 
 project(QCatGrayQuickProjects LANGUAGES CXX)
 
+if (UNIX)
+add_compile_options(-Wall -fPIC -Wno-stringop-overflow)
+endif(UNIX)
 
 message(STATUS "------------------------------------------------------------" )
 message(STATUS "[${PROJECT_NAME}] Configuration summary."                     )
@@ -19,18 +22,29 @@ message(STATUS " .. cmake system name ................. = ${CMAKE_SYSTEM_NAME}")
 
 
 set(3RDPARTY
+    libqrencode
+    lottie-qml
 )
 
 set(MODULES
     qml
+    QCatGrayQrenCodeQml
 )
 
 set(EXAMPLES
     catgrayquicktest
+    qrencodeqml
 )
 
 foreach(3rdparty_module ${3RDPARTY})
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/${3rdparty_module})
+    if(${3rdparty_module} STREQUAL "libqrencode")
+        if(NOT TARGET qrencode)
+            set(WITH_TOOLS OFF)
+            add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/${3rdparty_module})
+        endif()
+    else()
+        add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/${3rdparty_module})
+    endif()
 endforeach(3rdparty_module ${3RDPARTY})
 
 foreach(module ${MODULES})
