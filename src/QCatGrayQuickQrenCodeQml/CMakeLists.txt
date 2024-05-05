@@ -1,6 +1,6 @@
 ﻿cmake_minimum_required(VERSION 3.9)
 
-project(QCatGrayQrenCode LANGUAGES CXX)
+project(QCatGrayQuickQrenCodeQml LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -44,7 +44,7 @@ add_library(${PROJECT_NAME}_a STATIC ${SRC_LIST})
 
 
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE 
+    PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Gui
         Qt${QT_VERSION_MAJOR}::Widgets
@@ -52,18 +52,18 @@ target_link_libraries(${PROJECT_NAME}
         qrencode)
 
 target_link_libraries(${PROJECT_NAME}_a
-    PRIVATE 
+    PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Gui
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Quick
         qrencode)
 
-target_include_directories(${PROJECT_NAME} 
-    PUBLIC 
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/../../3rdparty/libqrencode)
-target_include_directories(${PROJECT_NAME}_a 
-    PUBLIC 
+target_include_directories(${PROJECT_NAME}_a
+    PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/../../3rdparty/libqrencode)

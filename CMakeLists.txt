@@ -28,7 +28,7 @@ set(3RDPARTY
 
 set(MODULES
     qml
-    QCatGrayQrenCodeQml
+    QCatGrayQuickQrenCodeQml
 )
 
 set(EXAMPLES
