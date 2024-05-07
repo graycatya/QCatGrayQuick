@@ -27,6 +27,7 @@ Item {
     property int yto: 0
     state: "custom"
 
+
     Image {
         id: imageroll
         asynchronous: true
@@ -36,11 +37,11 @@ Item {
             loops: Animation.Infinite
             PropertyAnimation{
                 id: imageroll_propertyx
-                target: imageroll 
+                target: imageroll
             }
             PropertyAnimation{
                 id: imageroll_propertyy
-                target: imageroll 
+                target: imageroll
             }
         }
     }
@@ -54,6 +55,9 @@ Item {
                 from: -imageroll.width
                 to: root.width
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -61,6 +65,9 @@ Item {
                 from: imageroll.y
                 to: imageroll.y
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -71,6 +78,9 @@ Item {
                 from: root.width
                 to: -imageroll.width
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -78,6 +88,9 @@ Item {
                 from: imageroll.y
                 to: imageroll.y
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -88,6 +101,9 @@ Item {
                 from: -imageroll.height
                 to: root.height 
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -95,6 +111,9 @@ Item {
                 from: imageroll.x
                 to: imageroll.x
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -105,6 +124,9 @@ Item {
                 from: root.height
                 to: -imageroll.height
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -112,6 +134,9 @@ Item {
                 from: imageroll.x
                 to: imageroll.x
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -122,6 +147,9 @@ Item {
                 from: -imageroll.width
                 to: root.width
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -129,6 +157,9 @@ Item {
                 from: root.height
                 to: -imageroll.height
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -139,6 +170,9 @@ Item {
                 from: -imageroll.width
                 to: root.width
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -146,6 +180,9 @@ Item {
                 from: -imageroll.height
                 to: root.height
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -156,6 +193,9 @@ Item {
                 from: root.width
                 to: -imageroll.width
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -163,6 +203,9 @@ Item {
                 from: root.height
                 to: -imageroll.height
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -173,6 +216,9 @@ Item {
                 from: root.width
                 to: -imageroll.width
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -180,6 +226,9 @@ Item {
                 from: -imageroll.height
                 to: root.height
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         },
         State {
@@ -190,6 +239,9 @@ Item {
                 from: root.xfrom
                 to: root.xto
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
             PropertyChanges {
                 target: imageroll_propertyy
@@ -197,6 +249,9 @@ Item {
                 from: root.yfrom
                 to: root.yto
                 duration: animation_duration
+                Component.onCompleted: {
+                    imageroll_sequential.restart();
+                }
             }
         }
     ]

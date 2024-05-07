@@ -52,7 +52,7 @@ Item {
             name: "previousbutton"
             PropertyChanges {
                 target: sorterbutton
-                source: "qrc:/QCatGrayQuick/Qml/CatModule/CatSorter/UpdatePageButton.qml";
+                source: "qrc:/qcatgrayquick_plugins/QCatGrayQuick/Qml/CatModule/CatSorter/UpdatePageButton.qml";
             }
             PropertyChanges {
                 target: catsorterbutton
@@ -63,7 +63,7 @@ Item {
             name: "nextbutton"
             PropertyChanges {
                 target: sorterbutton
-                source: "qrc:/QCatGrayQuick/Qml/CatModule/CatSorter/UpdatePageButton.qml";
+                source: "qrc:/qcatgrayquick_plugins/QCatGrayQuick/Qml/CatModule/CatSorter/UpdatePageButton.qml";
             }
             PropertyChanges {
                 target: catsorterbutton
@@ -74,7 +74,7 @@ Item {
             name: "updatepagetextbutton"
             PropertyChanges {
                 target: sorterbutton
-                source: "qrc:/QCatGrayQuick/Qml/CatModule/CatSorter/UpdatePageTextButton.qml";
+                source: "qrc:/qcatgrayquick_plugins/QCatGrayQuick/Qml/CatModule/CatSorter/UpdatePageTextButton.qml";
             }
             PropertyChanges {
                 target: catsorterbutton
@@ -85,7 +85,7 @@ Item {
             name: "previousskitpagebutton"
             PropertyChanges {
                 target: sorterbutton
-                source: "qrc:/QCatGrayQuick/Qml/CatModule/CatSorter/SkitPageButton.qml";
+                source: "qrc:/qcatgrayquick_plugins/QCatGrayQuick/Qml/CatModule/CatSorter/SkitPageButton.qml";
             }
             PropertyChanges {
                 target: catsorterbutton
@@ -96,7 +96,7 @@ Item {
             name: "nextskitpagebutton"
             PropertyChanges {
                 target: sorterbutton
-                source: "qrc:/QCatGrayQuick/Qml/CatModule/CatSorter/SkitPageButton.qml";
+                source: "qrc:/qcatgrayquick_plugins/QCatGrayQuick/Qml/CatModule/CatSorter/SkitPageButton.qml";
             }
             PropertyChanges {
                 target: catsorterbutton

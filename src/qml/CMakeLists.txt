@@ -23,10 +23,23 @@ endif()
 
 add_definitions(-DQCatGrayQuickImportPath="${QCatGrayQuickImport}")
 
-set(QML_IMPORT_PATH "${QCatGrayQuickPath}" CACHE STRING "QCatGrayQuick qml import path" FORCE)
-set(QML2_IMPORT_PATH "${QCatGrayQuickPath}" CACHE STRING "QCatGrayQuick qml2 import path" FORCE)
-set(QML_DESIGNER_IMPORT_PATH "${QCatGrayQuickPath}" CACHE STRING "QCatGrayQuick qml designer import path" FORCE)
+if(NOT QML_IMPORT_PATH MATCHES ${QCatGrayQuickPath})
+set(QML_IMPORT_PATH
+    "${QML_IMPORT_PATH}"
+    "${QCatGrayQuickPath}"
+    CACHE STRING "QCatGrayQuick qml import path" FORCE)
+set(QML2_IMPORT_PATH
+    "${QML_IMPORT_PATH}"
+    "${QCatGrayQuickPath}"
+    CACHE STRING "QCatGrayQuick qml2 import path" FORCE)
+set(QML_DESIGNER_IMPORT_PATH
+    "${QML_IMPORT_PATH}"
+    "${QCatGrayQuickPath}"
+    CACHE STRING "QCatGrayQuick qml designer import path" FORCE)
 set(CAT_QT_CURRENT_VERSION ${QT_VERSION} CACHE STRING "" FORCE)
+endif()
+
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     set(QRC_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/QCatGrayQt6Compat/QCatGrayQuick/QCatGrayQuick.qrc)
     qt_add_resources(QML_QRC_RESOURCE ${QRC_SOURCE_FILES})

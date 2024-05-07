@@ -29,10 +29,6 @@ Item {
             PropertyAnimation {
                 id: marquee_property
                 target: marquee
-                //property: "x"
-                //from: root.width
-                //to: - marquee.width
-                //duration: 1000
             }
         }
     }
@@ -45,6 +41,9 @@ Item {
                 property: "x"
                 from: root.width
                 to: - marquee.width
+                Component.onCompleted: {
+                    marquee_sequential.restart();
+                }
             }
         },
         State {
@@ -54,6 +53,9 @@ Item {
                 property: "x"
                 from: - marquee.width
                 to: root.width
+                Component.onCompleted: {
+                    marquee_sequential.restart();
+                }
             }
         },
         State {
@@ -62,7 +64,10 @@ Item {
                 target: marquee_property
                 property: "y"
                 from: -marquee.height
-                to: root.height 
+                to: root.height
+                Component.onCompleted: {
+                    marquee_sequential.restart();
+                }
             }
         },
         State {
@@ -72,6 +77,9 @@ Item {
                 property: "y"
                 from: root.height
                 to: -marquee.height
+                Component.onCompleted: {
+                    marquee_sequential.restart();
+                }
             }
         } 
     ]

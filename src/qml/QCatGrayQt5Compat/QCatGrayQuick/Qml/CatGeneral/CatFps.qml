@@ -13,6 +13,7 @@ Item {
     property int fpsHeight: 32
     property color gradient0Color: "#87CEFF"
     property color gradient1Color: "blue"
+    width: fpstext.contentWidth + fpsWidth
 
 /*
     Image {

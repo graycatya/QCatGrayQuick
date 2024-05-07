@@ -1,4 +1,4 @@
-﻿//qrc:/QCatGrayQuick/Qml/CatModule/CatSorter/CatSorterButton.qml
+﻿//qrc:/qcatgrayquick_plugins/QCatGrayQuick/Qml/CatModule/CatSorter/CatSorterButton.qml
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import "../CatGraphicalEffects"
@@ -120,7 +120,7 @@ Item {
 
 
         function clearPage() {
-            //console.log("sortermodel.count: " + sortermodel.count)
+            console.log("sortermodel.count: " + sortermodel.count)
             while(sortermodel.count > 0)
             {
                 sortermodel.get(0).disconnectsignal()
@@ -137,7 +137,7 @@ Item {
             let textbuttonNumber = 1;
             for(let i = 0; i < buttonNumber; i++)
             {
-                let item = Qt.createComponent("qrc:/QCatGrayQuick/Qml/CatModule/CatSorter/CatSorterButton.qml");
+                let item = Qt.createComponent("qrc:/qcatgrayquick_plugins/QCatGrayQuick/Qml/CatModule/CatSorter/CatSorterButton.qml");
                 sortermodel.insert(sorterview.model.count, item.createObject(sorterview));
                 sortermodel.get(sorterview.model.count - 1).itemSize = itemSize;
                 sortermodel.get(sorterview.model.count - 1).spacing = itemSpacing;
