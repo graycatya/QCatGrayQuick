@@ -29,6 +29,7 @@ set(3RDPARTY
 set(MODULES
     qml
     QCatGrayQuickQrenCodeQml
+    QCatGrayQuickChatModel
 )
 
 set(EXAMPLES
