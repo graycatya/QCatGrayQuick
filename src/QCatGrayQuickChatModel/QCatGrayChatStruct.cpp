@@ -7,42 +7,64 @@ QCatGrayChatStruct::~QCatGrayChatStruct()
 
 }
 
-void QCatGrayChatStruct::setId(qint64 id)
+void QCatGrayChatStruct::setid(qint64 id)
 {
-    m_Id = id;
+    if(m_Id != id)
+    {
+        m_Id = id;
+        emit idChanged();
+    }
 }
 
-qint64 QCatGrayChatStruct::getId() const
+void QCatGrayChatStruct::setsenderimage(const QUrl senderimage)
 {
-    return m_Id;
+    if(m_SenderImage != senderimage)
+    {
+        m_SenderImage = senderimage;
+        emit senderimageChanged();
+    }
 }
 
-void QCatGrayChatStruct::setSender(const QString sender)
+
+void QCatGrayChatStruct::setsender(const QString sender)
 {
-    m_Sender = sender;
+    if(m_Sender != sender)
+    {
+        m_Sender = sender;
+        emit senderChanged();
+    }
 }
 
-void QCatGrayChatStruct::setRecipient(const QString recipient)
+void QCatGrayChatStruct::setrecipientimage(const QUrl recipientimage)
+{
+    if(m_RecipientImage != recipientimage)
+    {
+        m_RecipientImage = recipientimage;
+        emit recipientimageChanged();
+    }
+}
+
+void QCatGrayChatStruct::setrecipient(const QString recipient)
 {
     m_Recipient = recipient;
 }
 
-void QCatGrayChatStruct::setDatetime(quint64 datetime)
+void QCatGrayChatStruct::setdatetime(quint64 datetime)
 {
     m_Datetime =datetime;
 }
 
-void QCatGrayChatStruct::setData(QVariant data)
+void QCatGrayChatStruct::setdata(QVariant data)
 {
     m_Data = data;
 }
 
-void QCatGrayChatStruct::setType(ChatType type)
+void QCatGrayChatStruct::settype(ChatType type)
 {
     m_Type = type;
 }
 
-void QCatGrayChatStruct::setStatus(ChatStatus status)
+void QCatGrayChatStruct::setstatus(ChatStatus status)
 {
     m_Status = status;
 }
