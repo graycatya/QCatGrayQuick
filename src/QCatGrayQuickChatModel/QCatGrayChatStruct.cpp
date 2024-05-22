@@ -16,7 +16,16 @@ void QCatGrayChatStruct::setid(qint64 id)
     }
 }
 
-void QCatGrayChatStruct::setsenderimage(const QUrl senderimage)
+void QCatGrayChatStruct::setusername(const QString username)
+{
+    if(m_UserName != username)
+    {
+        m_UserName = username;
+        emit usernameChanged();
+    }
+}
+
+void QCatGrayChatStruct::setsenderimage(const QString senderimage)
 {
     if(m_SenderImage != senderimage)
     {
@@ -35,7 +44,7 @@ void QCatGrayChatStruct::setsender(const QString sender)
     }
 }
 
-void QCatGrayChatStruct::setrecipientimage(const QUrl recipientimage)
+void QCatGrayChatStruct::setrecipientimage(const QString recipientimage)
 {
     if(m_RecipientImage != recipientimage)
     {

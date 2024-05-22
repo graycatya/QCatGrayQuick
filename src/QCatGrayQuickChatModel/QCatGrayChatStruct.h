@@ -9,14 +9,17 @@ class QCatGrayChatStruct : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qint64 id READ id WRITE setid NOTIFY idChanged FINAL)
-    Q_PROPERTY(QUrl senderimage READ senderimage WRITE setsenderimage NOTIFY senderimageChanged FINAL)
+    Q_PROPERTY(QString username READ username WRITE setusername NOTIFY usernameChanged FINAL)
+    Q_PROPERTY(QString senderimage READ senderimage WRITE setsenderimage NOTIFY senderimageChanged FINAL)
     Q_PROPERTY(QString sender READ sender WRITE setsender NOTIFY senderChanged FINAL)
-    Q_PROPERTY(QUrl recipientimage READ recipientimage WRITE setrecipientimage NOTIFY recipientimageChanged FINAL)
+    Q_PROPERTY(QString recipientimage READ recipientimage WRITE setrecipientimage NOTIFY recipientimageChanged FINAL)
     Q_PROPERTY(QString recipient READ recipient WRITE setrecipient NOTIFY recipientChanged FINAL)
     Q_PROPERTY(quint64 datetime READ datetime WRITE setdatetime NOTIFY datetimeChanged FINAL)
     Q_PROPERTY(QVariant data READ data WRITE setdata NOTIFY dataChanged FINAL)
     Q_PROPERTY(ChatType type READ type WRITE settype NOTIFY typeChanged FINAL)
     Q_PROPERTY(ChatStatus status READ status WRITE setstatus NOTIFY statusChanged FINAL)
+    Q_ENUMS(ChatType)
+    Q_ENUMS(ChatStatus)
 public:
     using QObject::QObject;
 
@@ -27,7 +30,7 @@ public:
         Chat_Auido,
         Chat_Video
     };
-    Q_ENUM(ChatType)
+    //Q_ENUM(ChatType)
 
     enum ChatStatus
     {
@@ -37,7 +40,7 @@ public:
         Chat_ParseSuccess,
         Chat_ParseError
     };
-    Q_ENUM(ChatStatus)
+    //Q_ENUM(ChatStatus)
 
     QCatGrayChatStruct();
     ~QCatGrayChatStruct();
@@ -45,14 +48,17 @@ public:
     void setid(qint64 id);
     qint64 id() const { return m_Id; }
 
-    void setsenderimage(const QUrl senderimage);
-    QUrl senderimage() const { return m_SenderImage; }
+    void setusername(const QString username);
+    QString username() const { return m_UserName; }
+
+    void setsenderimage(const QString senderimage);
+    QString senderimage() const { return m_SenderImage; }
 
     void setsender(const QString sender);
     QString sender() const { return m_Sender; }
 
-    void setrecipientimage(const QUrl recipientimage);
-    QUrl recipientimage() const { return m_RecipientImage; }
+    void setrecipientimage(const QString recipientimage);
+    QString recipientimage() const { return m_RecipientImage; }
 
     void setrecipient(const QString recipient);
     QString recipient() const { return m_Recipient; }
@@ -71,6 +77,7 @@ public:
 
 signals:
     void idChanged();
+    void usernameChanged();
     void senderimageChanged();
     void senderChanged();
     void recipientimageChanged();
@@ -82,9 +89,10 @@ signals:
 
 protected:
     qint64 m_Id;
-    QUrl m_SenderImage;
+    QString m_UserName;
+    QString m_SenderImage;
     QString m_Sender;
-    QUrl m_RecipientImage;
+    QString m_RecipientImage;
     QString m_Recipient;
     quint64 m_Datetime;
     QVariant m_Data;

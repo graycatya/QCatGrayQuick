@@ -3,9 +3,18 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
 Item {
-    property color senderBgColor: SystemPalette.base
-    property color recipientBgColor: SystemPalette.base
+    id: root
+    property color senderBgColor: "transparent"
+    property color recipientBgColor: "transparent"
+    property alias delegate: chatitemDelegate
+    readonly property bool isUser: (model.username === model.sender)
 
-    readonly property bool isSender: (model.sender === model.recipient)
+    Loader {
+        id:chatitemDelegate
+        anchors.fill: parent
+        onStatusChanged: {
+            console.log("chatitemDelegate loader status: " + chatitemDelegate.status)
+        }
+    }
 
 }
