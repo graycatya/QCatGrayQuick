@@ -118,11 +118,20 @@ QCatGrayChatStruct* QCatGrayQuickChatModel::appendStruct(qint64 id, QString user
     return chatstruct;
 }
 
+QCatGrayChatStruct *QCatGrayQuickChatModel::getStruct(int index)
+{
+    if(index >= 0 && index < m_ChatStructList.count())
+    {
+        return m_ChatStructList.at(index).get();
+    }
+    return nullptr;
+}
+
 void QCatGrayQuickChatModel::removeStruct(int index)
 {
-    beginInsertRows(QModelIndex(),m_ChatStructList.count(),m_ChatStructList.count());
+    beginRemoveRows(QModelIndex(),m_ChatStructList.count(),m_ChatStructList.count());
     m_ChatStructList.removeAt(index);
-    endInsertRows();
+    endRemoveRows();
 }
 
 void QCatGrayQuickChatModel::clearModel()

@@ -1,4 +1,5 @@
 #include "QCatGrayChatStruct.h"
+#include <QDebug>
 
 QCatGrayChatStruct::QCatGrayChatStruct() {}
 

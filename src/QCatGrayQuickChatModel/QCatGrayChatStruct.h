@@ -45,34 +45,34 @@ public:
     QCatGrayChatStruct();
     ~QCatGrayChatStruct();
 
-    void setid(qint64 id);
+    Q_INVOKABLE void setid(qint64 id);
     qint64 id() const { return m_Id; }
 
-    void setusername(const QString username);
+    Q_INVOKABLE void setusername(const QString username);
     QString username() const { return m_UserName; }
 
-    void setsenderimage(const QString senderimage);
+    Q_INVOKABLE void setsenderimage(const QString senderimage);
     QString senderimage() const { return m_SenderImage; }
 
-    void setsender(const QString sender);
+    Q_INVOKABLE void setsender(const QString sender);
     QString sender() const { return m_Sender; }
 
-    void setrecipientimage(const QString recipientimage);
+    Q_INVOKABLE void setrecipientimage(const QString recipientimage);
     QString recipientimage() const { return m_RecipientImage; }
 
-    void setrecipient(const QString recipient);
+    Q_INVOKABLE void setrecipient(const QString recipient);
     QString recipient() const { return m_Recipient; }
 
-    void setdatetime(quint64 datetime);
+    Q_INVOKABLE void setdatetime(quint64 datetime);
     quint64 datetime() const { return m_Datetime; }
 
-    void setdata(QVariant data);
+    Q_INVOKABLE void setdata(QVariant data);
     QVariant data() const { return m_Data; }
 
-    void settype(ChatType type);
+    Q_INVOKABLE void settype(ChatType type);
     ChatType type() const { return m_Type; }
 
-    void setstatus(ChatStatus status);
+    Q_INVOKABLE void setstatus(ChatStatus status);
     ChatStatus status() const { return m_Status; }
 
 signals:

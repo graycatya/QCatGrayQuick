@@ -20,6 +20,8 @@ public:
                             QString recipient, quint64 datetime,
                             QVariant data, int type);
 
+    Q_INVOKABLE QCatGrayChatStruct* getStruct(int index);
+
     Q_INVOKABLE void removeStruct(int index);
     Q_INVOKABLE void clearModel();
 
