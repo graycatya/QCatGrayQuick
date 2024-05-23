@@ -37,4 +37,7 @@ CatSorter 1.0 Qml/CatModule/CatSorter.qml
 ArcProgressBar 1.0 Qml/CatProgressBar/ArcProgressBar.qml
 ArcProgressBarCanvas 1.0 Qml/CatProgressBar/ArcProgressBarCanvas.qml
 BarTypeProgressBar 1.0 Qml/CatProgressBar/BarTypeProgressBar.qml
+CatChatView 1.0 Qml/CatChat/CatChatView.qml
+CatChatItemBase 1.0 Qml/CatChat/CatChatItemBase.qml
+CatChatTextEdit 1.0 Qml/CatChat/CatChatTextEdit.qml
 QCatGrayQuickStyle 1.0 Qml/QCatGrayQuickStyle.qml

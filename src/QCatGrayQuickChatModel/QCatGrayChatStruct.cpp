@@ -1,5 +1,5 @@
 #include "QCatGrayChatStruct.h"
-#include <QDebug>
+#include <QDateTime>
 
 QCatGrayChatStruct::QCatGrayChatStruct() {}
 
@@ -62,6 +62,15 @@ void QCatGrayChatStruct::setrecipient(const QString recipient)
 void QCatGrayChatStruct::setdatetime(quint64 datetime)
 {
     m_Datetime =datetime;
+}
+
+QString QCatGrayChatStruct::datetimeToString(QString format)
+{
+    QDateTime dateTime = QDateTime::fromMSecsSinceEpoch(m_Datetime);
+
+    dateTime = dateTime.toLocalTime();
+
+    return dateTime.toString(format);
 }
 
 void QCatGrayChatStruct::setdata(QVariant data)

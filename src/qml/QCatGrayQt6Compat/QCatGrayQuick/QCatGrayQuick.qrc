@@ -40,5 +40,8 @@
         <file>Qml/CatProgressBar/ArcProgressBar.qml</file>
         <file>Qml/CatProgressBar/ArcProgressBarCanvas.qml</file>
         <file>Qml/CatProgressBar/BarTypeProgressBar.qml</file>
+        <file>Qml/CatChat/CatChatView.qml</file>
+        <file>Qml/CatChat/CatChatTextEdit.qml</file>
+        <file>Qml/CatChat/CatChatItemBase.qml</file>
     </qresource>
 </RCC>
