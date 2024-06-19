@@ -1,4 +1,4 @@
-#include "QCatGrayChatStruct.h"
+﻿#include "QCatGrayChatStruct.h"
 #include <QDateTime>
 
 QCatGrayChatStruct::QCatGrayChatStruct() {}
@@ -71,6 +71,13 @@ QString QCatGrayChatStruct::datetimeToString(QString format)
     dateTime = dateTime.toLocalTime();
 
     return dateTime.toString(format);
+}
+
+QString QCatGrayChatStruct::timeToString(QString format)
+{
+    QTime time = QTime(0,0,0);
+    time = time.addMSecs(m_Datetime);
+    return time.toString(format);
 }
 
 void QCatGrayChatStruct::setdata(QVariant data)

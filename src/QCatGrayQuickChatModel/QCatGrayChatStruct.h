@@ -1,4 +1,4 @@
-#ifndef QCATGRAYCHATSTRUCT_H
+﻿#ifndef QCATGRAYCHATSTRUCT_H
 #define QCATGRAYCHATSTRUCT_H
 
 #include <QObject>
@@ -66,6 +66,7 @@ public:
     Q_INVOKABLE void setdatetime(quint64 datetime);
     quint64 datetime() const { return m_Datetime; }
     Q_INVOKABLE QString datetimeToString(QString format);
+    Q_INVOKABLE QString timeToString(QString format);
 
     Q_INVOKABLE void setdata(QVariant data);
     QVariant data() const { return m_Data; }
