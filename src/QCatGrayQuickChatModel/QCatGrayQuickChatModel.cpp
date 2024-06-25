@@ -1,4 +1,4 @@
-#include "QCatGrayQuickChatModel.h"
+﻿#include "QCatGrayQuickChatModel.h"
 #include <QSharedPointer>
 
 QCatGrayQuickChatModel::QCatGrayQuickChatModel(QObject *parent)
@@ -125,6 +125,11 @@ QCatGrayChatStruct *QCatGrayQuickChatModel::getStruct(int index)
         return m_ChatStructList.at(index).get();
     }
     return nullptr;
+}
+
+int QCatGrayQuickChatModel::getStructSize()
+{
+    return m_ChatStructList.length();
 }
 
 void QCatGrayQuickChatModel::removeStruct(int index)

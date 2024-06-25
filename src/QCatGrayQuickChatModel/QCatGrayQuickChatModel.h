@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QAbstractListModel>
 #include "QCatGrayChatStruct.h"
@@ -21,6 +21,7 @@ public:
                             QVariant data, int type);
 
     Q_INVOKABLE QCatGrayChatStruct* getStruct(int index);
+    Q_INVOKABLE int getStructSize();
 
     Q_INVOKABLE void removeStruct(int index);
     Q_INVOKABLE void clearModel();
