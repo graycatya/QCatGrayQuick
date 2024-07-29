@@ -12,3 +12,8 @@ void QCatGrayQuickPlugins::InitQCatGrayQuickPlugins(QQmlApplicationEngine * engi
 {
     engine->addImportPath(QCatGrayQuickImportPath);
 }
+
+void QCatGrayQuickPlugins::InitQCatGrayQuickPlugins(QQmlEngine *engine)
+{
+    engine->addImportPath(QCatGrayQuickImportPath);
+}
