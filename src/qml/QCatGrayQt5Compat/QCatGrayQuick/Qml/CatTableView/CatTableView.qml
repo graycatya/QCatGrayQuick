@@ -5,7 +5,12 @@ Rectangle {
     id: root
     property alias viewLayout: tableLayout
     property alias viewScrol: itemviewScrol
+    //property alias viewRepeater: tableRepeater
+    property alias model: tableRepeater.model
+    property alias delegate: tableRepeater.delegate
+
     clip: true
+
     Flickable {
         id: itemviewScrol
         boundsBehavior: Flickable.StopAtBounds
@@ -19,31 +24,25 @@ Rectangle {
         Column {
             id: tableLayout
             Repeater {
-                model: 10
-                delegate: CatTableViewDelegateBase {
-                    width: 1000
-                    height: 50
-                    Rectangle {
-                        border.width: 1
-                        anchors.fill: parent
-                        color: "blue"
-                    }
-                }
+                id: tableRepeater
+//                delegate: CatTableViewDelegateBase {
+//                    delegate: root.delegate
+//                }
             }
         }
-        Rectangle {
-            y: itemviewScrol.contentY
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 50
-            color: "blue"
-        }
-        Rectangle {
-            x: itemviewScrol.contentX
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            width: 100
-            color: "gray"
-        }
+//        Rectangle {
+//            id: headerItem
+//            y: itemviewScrol.contentY
+//            anchors.left: parent.left
+//            anchors.right: parent.right
+//            color: "transparent"
+//            Loader {
+//                id: headerItemloader
+//                onWidthChanged: {
+//                    console.log("loader w: " + width)
+//                }
+//            }
+
+//        }
     }
 }
