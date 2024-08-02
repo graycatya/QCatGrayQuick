@@ -30,6 +30,7 @@ set(MODULES
     qml
     QCatGrayQuickQrenCodeQml
     QCatGrayQuickChatModel
+    QCatGrayQuickTableViewModel
 )
 
 set(EXAMPLES
