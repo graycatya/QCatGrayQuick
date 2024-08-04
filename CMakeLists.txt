@@ -27,10 +27,10 @@ set(3RDPARTY
 )
 
 set(MODULES
-    qml
     QCatGrayQuickQrenCodeQml
     QCatGrayQuickChatModel
     QCatGrayQuickTableViewModel
+    qml
 )
 
 set(EXAMPLES

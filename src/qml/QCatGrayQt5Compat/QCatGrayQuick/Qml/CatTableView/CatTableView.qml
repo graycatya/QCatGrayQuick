@@ -6,8 +6,10 @@ Rectangle {
     property alias viewLayout: tableLayout
     property alias viewScrol: itemviewScrol
     //property alias viewRepeater: tableRepeater
-    property alias model: tableRepeater.model
+    property var model: null
     property alias delegate: tableRepeater.delegate
+    property var headerData: []
+    color: "transparent"
 
     clip: true
 
@@ -25,6 +27,7 @@ Rectangle {
             id: tableLayout
             Repeater {
                 id: tableRepeater
+                model: root.model
 //                delegate: CatTableViewDelegateBase {
 //                    delegate: root.delegate
 //                }

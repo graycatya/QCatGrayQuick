@@ -48,6 +48,11 @@ else(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt5_add_resources(QML_QRC_RESOURCE ${QRC_SOURCE_FILES})
 endif(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
+if(TARGET QCatGrayQuickTableViewModel)
+  add_definitions(-DQCATGRAYQUICKTABLEVIEWMODEL_TARGET)
+  set(QCATGRAYQUICKTABLEVIEWMODEL_TARGET ON)
+endif()
+
 
 add_library(${PROJECT_NAME} STATIC ${QML_QRC_RESOURCE}
     QCatGrayQuickPlugins.h QCatGrayQuickPlugins.cpp)
@@ -57,5 +62,11 @@ target_link_libraries(${PROJECT_NAME}
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Gui
         Qt${QT_VERSION_MAJOR}::Quick)
+
+if (DEFINED QCATGRAYQUICKTABLEVIEWMODEL_TARGET)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE QCatGrayQuickTableViewModel
+            )
+endif()
 
 target_include_directories(${PROJECT_NAME} INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}")

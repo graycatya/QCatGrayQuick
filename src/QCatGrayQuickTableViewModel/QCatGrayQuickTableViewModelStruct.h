@@ -19,6 +19,15 @@ public:
     Q_INVOKABLE void setdata(QJsonObject data);
     QJsonObject data() const { return m_Data; }
 
+    virtual Q_INVOKABLE QVariant columnData(quint32 column) {
+        Q_UNUSED(column)
+        if(m_Data.keys().length() <= column && column < 0)
+        {
+            return QVariant();
+        }
+        return QVariant();
+    }
+
     Q_INVOKABLE int length() const { return m_Data.keys().length(); }
 
 signals:
