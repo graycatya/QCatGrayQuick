@@ -85,6 +85,48 @@ void QCatGrayQuickTableViewModel::setHeaderCount(int headerCount)
     if(m_HeaderCount != headerCount)
     {
         m_HeaderCount = headerCount;
+        m_headerStruct.clear();
+        for(int i = 0; i < m_HeaderCount; i++)
+        {
+            QCatGrayQuickTableViewHeaderStruct *t_struct = new QCatGrayQuickTableViewHeaderStruct(this);
+            m_headerStruct.insert(m_headerStruct.count(), QSharedPointer<QCatGrayQuickTableViewHeaderStruct>(t_struct));
+        }
         emit headerCountChanged();
+    }
+}
+
+QCatGrayQuickTableViewHeaderStruct *QCatGrayQuickTableViewModel::getHeaderStruct(int index)
+{
+    if(index >= 0 && index < m_headerStruct.count())
+    {
+        return m_headerStruct.at(index).get();
+    }
+    return nullptr;
+}
+
+void QCatGrayQuickTableViewModel::setPreferredHeaderHeight(int height)
+{
+    if(m_PreferredHeaderHeight != height)
+    {
+        m_PreferredHeaderHeight = height;
+        emit preferredHeaderHeightChanged();
+    }
+}
+
+void QCatGrayQuickTableViewModel::setMinimumHeaderHeight(int height)
+{
+    if(m_MinimumHeaderHeight != height)
+    {
+        m_MinimumHeaderHeight = height;
+        emit minimumHeaderHeightChanged();
+    }
+}
+
+void QCatGrayQuickTableViewModel::setMaximumHeaderHeight(int height)
+{
+    if(m_MaximumHeaderHeight != height)
+    {
+        m_MaximumHeaderHeight = height;
+        emit maximumHeaderHeightChanged();
     }
 }

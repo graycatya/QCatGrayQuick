@@ -4,6 +4,7 @@
 #ifdef QCATGRAYQUICKTABLEVIEWMODEL_TARGET
 #include "QCatGrayQuickTableViewModel.h"
 #include "QCatGrayQuickTableViewModelStruct.h"
+#include "QCatGrayQuickTableViewHeaderStruct.h"
 #endif
 
 QCatGrayQuickPlugins::QCatGrayQuickPlugins(QObject *parent)
@@ -17,8 +18,9 @@ void QCatGrayQuickPlugins::InitQCatGrayQuickPlugins(QQmlApplicationEngine * engi
 {
     engine->addImportPath(QCatGrayQuickImportPath);
 #ifdef QCATGRAYQUICKTABLEVIEWMODEL_TARGET
-    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("QCatGrayQuickTableViewModelStruct", 1, 0, "QCatGrayQuickTableViewModelStruct");
-    qmlRegisterType<QCatGrayQuickTableViewModel>("QCatGrayQuickTableViewModel", 1, 0, "QCatGrayQuickTableViewModel");
+    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewHeaderStruct", 1, 0, "QCatGrayQuickTableViewHeaderStruct");
+    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewModelStruct", 1, 0, "QCatGrayQuickTableViewModelStruct");
+    qmlRegisterType<QCatGrayQuickTableViewModel>("com.catgray.QCatGrayQuickTableViewModel", 1, 0, "QCatGrayQuickTableViewModel");
 #endif
 }
 
@@ -26,7 +28,8 @@ void QCatGrayQuickPlugins::InitQCatGrayQuickPlugins(QQmlEngine *engine)
 {
     engine->addImportPath(QCatGrayQuickImportPath);
 #ifdef QCATGRAYQUICKTABLEVIEWMODEL_TARGET
-    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("QCatGrayQuickTableViewModelStruct", 1, 0, "QCatGrayQuickTableViewModelStruct");
-    qmlRegisterType<QCatGrayQuickTableViewModel>("QCatGrayQuickTableViewModel", 1, 0, "QCatGrayQuickTableViewModel");
+    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewHeaderStruct", 1, 0, "QCatGrayQuickTableViewHeaderStruct");
+    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewModelStruct", 1, 0, "QCatGrayQuickTableViewModelStruct");
+    qmlRegisterType<QCatGrayQuickTableViewModel>("com.catgray.QCatGrayQuickTableViewModel", 1, 0, "QCatGrayQuickTableViewModel");
 #endif
 }

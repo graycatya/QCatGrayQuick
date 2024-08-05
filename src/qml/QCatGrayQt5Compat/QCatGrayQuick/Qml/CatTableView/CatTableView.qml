@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-import QCatGrayQuickTableViewModel 1.0
+import com.catgray.QCatGrayQuickTableViewModel 1.0
 
 Rectangle {
     id: root
@@ -25,29 +25,31 @@ Rectangle {
         id: itemviewScrol
         boundsBehavior: Flickable.StopAtBounds
         anchors.fill: parent
-        contentWidth: tableLayout.implicitWidth
-        contentHeight: tableLayout.implicitHeight
+        contentWidth: headerColumn.implicitWidth
+        contentHeight: tableLayout.implicitHeight + catgrayquickTableViewModel.preferredHeaderHeight
 
         ScrollBar.vertical: ScrollBar{}
         ScrollBar.horizontal: ScrollBar{}
 
         Column {
             id: tableLayout
+            anchors.top: parent.top
+            anchors.topMargin: catgrayquickTableViewModel.preferredHeaderHeight
+            readonly property alias datamodel: catgrayquickTableViewModel
             Repeater {
                 id: tableRepeater
                 model: catgrayquickTableViewModel
-//                delegate: CatTableViewDelegateBase {
-//                    delegate: root.delegate
-//                }
             }
         }
-       Rectangle {
-           id: headerItem
-           y: itemviewScrol.contentY
-           anchors.left: parent.left
-           anchors.right: parent.right
-           color: "transparent"
-           Column {
+        Rectangle {
+            id: headerItem
+            y: itemviewScrol.contentY
+            anchors.left: parent.left
+            width: headerColumn.implicitWidth
+            height: headerColumn.implicitHeight
+            color: "transparent"
+            Column {
+                id: headerColumn
                 spacing: 0
                 Repeater {
                     id: headerColumnRepeater
@@ -60,13 +62,10 @@ Rectangle {
                             id: headerRowRepeater
                             model: catgrayquickTableViewModel.headerCount
                             delegate: root.headerDelegate
-
                         }
-
                     }
                 }
-           }
-
-       }
+            }
+        }
     }
 }

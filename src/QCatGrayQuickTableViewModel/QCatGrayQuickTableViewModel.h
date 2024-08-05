@@ -3,12 +3,15 @@
 
 #include <QAbstractListModel>
 #include "QCatGrayQuickTableViewModelStruct.h"
-
+#include "QCatGrayQuickTableViewHeaderStruct.h"
 
 class QCatGrayQuickTableViewModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(uint headerCount READ headerCount WRITE setHeaderCount NOTIFY headerCountChanged FINAL)
+    Q_PROPERTY(uint headerCount READ headerCount WRITE setHeaderCount NOTIFY headerCountChanged)
+    Q_PROPERTY(int preferredHeaderHeight READ preferredHeaderHeight WRITE setPreferredHeaderHeight NOTIFY preferredHeaderHeightChanged)
+    Q_PROPERTY(int minimumHeaderHeight READ minimumHeaderHeight WRITE setMinimumHeaderHeight NOTIFY minimumHeaderHeightChanged)
+    Q_PROPERTY(int maximumHeaderHeight READ maximumHeaderHeight WRITE setMaximumHeaderHeight NOTIFY maximumHeaderHeightChanged)
 public:
     explicit QCatGrayQuickTableViewModel(QObject *parent = nullptr);
     ~QCatGrayQuickTableViewModel();
@@ -25,11 +28,28 @@ public:
 
     int headerCount() const { return m_HeaderCount; }
     Q_INVOKABLE void setHeaderCount(int headerCount);
+    Q_INVOKABLE QCatGrayQuickTableViewHeaderStruct* getHeaderStruct(int index);
+
+    int preferredHeaderHeight() { return m_PreferredHeaderHeight; }
+    void setPreferredHeaderHeight(int height);
+
+    int minimumHeaderHeight() { return m_MinimumHeaderHeight; }
+    void setMinimumHeaderHeight(int height);
+
+    int maximumHeaderHeight() { return m_MaximumHeaderHeight; }
+    void setMaximumHeaderHeight(int height);
 
 signals:
     void headerCountChanged();
+    void preferredHeaderHeightChanged();
+    void minimumHeaderHeightChanged();
+    void maximumHeaderHeightChanged();
 
 private:
     QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> m_StructList;
+    QList<QSharedPointer<QCatGrayQuickTableViewHeaderStruct>> m_headerStruct;
     uint m_HeaderCount = 0;
+    int m_PreferredHeaderHeight = 30;
+    int m_MinimumHeaderHeight = 30;
+    int m_MaximumHeaderHeight = 30;
 };

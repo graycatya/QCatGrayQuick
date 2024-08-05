@@ -27,7 +27,8 @@ file(GLOB SRC_LIST
   "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
 )
 
-add_library(${PROJECT_NAME} SHARED ${SRC_LIST})
+add_library(${PROJECT_NAME} SHARED ${SRC_LIST}
+    QCatGrayQuickTableViewHeaderStruct.h QCatGrayQuickTableViewHeaderStruct.cpp)
 
 add_library(${PROJECT_NAME}_a STATIC ${SRC_LIST})
 
