@@ -65,7 +65,7 @@ target_link_libraries(${PROJECT_NAME}
 
 if (DEFINED QCATGRAYQUICKTABLEVIEWMODEL_TARGET)
     target_link_libraries(${PROJECT_NAME}
-        PRIVATE QCatGrayQuickTableViewModel
+        PRIVATE QCatGrayQuickTableViewModel_a
             )
 endif()
 
