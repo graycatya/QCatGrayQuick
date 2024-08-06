@@ -12,6 +12,7 @@ class QCatGrayQuickTableViewModel : public QAbstractListModel
     Q_PROPERTY(int preferredHeaderHeight READ preferredHeaderHeight WRITE setPreferredHeaderHeight NOTIFY preferredHeaderHeightChanged)
     Q_PROPERTY(int minimumHeaderHeight READ minimumHeaderHeight WRITE setMinimumHeaderHeight NOTIFY minimumHeaderHeightChanged)
     Q_PROPERTY(int maximumHeaderHeight READ maximumHeaderHeight WRITE setMaximumHeaderHeight NOTIFY maximumHeaderHeightChanged)
+    Q_PROPERTY(int flickableWidth READ flickableWidth WRITE setFlickableWidth NOTIFY flickableWidthChanged)
 public:
     explicit QCatGrayQuickTableViewModel(QObject *parent = nullptr);
     ~QCatGrayQuickTableViewModel();
@@ -30,20 +31,46 @@ public:
     Q_INVOKABLE void setHeaderCount(int headerCount);
     Q_INVOKABLE QCatGrayQuickTableViewHeaderStruct* getHeaderStruct(int index);
 
-    int preferredHeaderHeight() { return m_PreferredHeaderHeight; }
+    Q_INVOKABLE void setAllHeaderPreferredWidth(int width);
+    Q_INVOKABLE void setAllHeaderMinimumWidth(int width);
+    Q_INVOKABLE void setAllHeaderMaximumWidth(int width);
+
+    Q_INVOKABLE void setAllItemPreferredHeight(int height);
+    Q_INVOKABLE void setAllItemMinimumHeight(int height);
+    Q_INVOKABLE void setAllItemMaximumHeight(int height);
+
+    int preferredHeaderHeight() const { return m_PreferredHeaderHeight; }
     void setPreferredHeaderHeight(int height);
 
-    int minimumHeaderHeight() { return m_MinimumHeaderHeight; }
+    int minimumHeaderHeight() const { return m_MinimumHeaderHeight; }
     void setMinimumHeaderHeight(int height);
 
-    int maximumHeaderHeight() { return m_MaximumHeaderHeight; }
+    int maximumHeaderHeight() const { return m_MaximumHeaderHeight; }
     void setMaximumHeaderHeight(int height);
+
+    int flickableWidth() const { return m_FlickableWidth; }
+    Q_INVOKABLE void setFlickableWidth(int width);
+
+private:
+    void InitConnect();
+    void UpdateHeaderStruct();
 
 signals:
     void headerCountChanged();
     void preferredHeaderHeightChanged();
     void minimumHeaderHeightChanged();
     void maximumHeaderHeightChanged();
+
+    void setAllHeaderPreferredWidthed(int width);
+    void setAllHeaderMinimumWidthed(int width);
+    void setAllHeaderMaximumWidthed(int width);
+
+    void setAllItemPreferredHeighted(int height);
+    void setAllItemMinimumHeighted(int height);
+    void setAllItemMaximumHeighted(int height);
+
+    void flickableWidthChanged();
+
 
 private:
     QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> m_StructList;
@@ -52,4 +79,5 @@ private:
     int m_PreferredHeaderHeight = 30;
     int m_MinimumHeaderHeight = 30;
     int m_MaximumHeaderHeight = 30;
+    int m_FlickableWidth = 0;
 };

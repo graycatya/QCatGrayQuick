@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import com.catgray.QCatGrayQuickTableViewModel 1.0
 
 Rectangle {
@@ -8,7 +9,7 @@ Rectangle {
     property alias viewScrol: itemviewScrol
     //property alias viewRepeater: tableRepeater
     readonly property alias model: catgrayquickTableViewModel
-    property alias delegate: tableRepeater.delegate
+    property Component delegate: null
     property var headerData: []
     property Component headerDelegate: null
     property int columnfreezeNum: 0
@@ -16,9 +17,16 @@ Rectangle {
 
     clip: true
 
+    onHeaderDataChanged: {
+        catgrayquickTableViewModel.headerCount = headerData.length
+    }
+
     QCatGrayQuickTableViewModel {
         id: catgrayquickTableViewModel
-        headerCount: headerData.length
+        flickableWidth: itemviewScrol.width
+        onFlickableWidthChanged: {
+            console.log("flickableWidth: " + flickableWidth)
+        }
     }
 
     Flickable {
@@ -39,6 +47,9 @@ Rectangle {
             Repeater {
                 id: tableRepeater
                 model: catgrayquickTableViewModel
+                CatTableViewDelegateBase {
+                    delegate: root.delegate
+                }
             }
         }
         Rectangle {
@@ -51,13 +62,16 @@ Rectangle {
             Column {
                 id: headerColumn
                 spacing: 0
+                readonly property alias datamodel: catgrayquickTableViewModel
                 Repeater {
                     id: headerColumnRepeater
                     model: root.columnfreezeNum
+
                     Row {
                         id: headerRow
                         spacing: 0
                         readonly property int columnRepeaterIndex: index
+                        readonly property var headerData: root.headerData
                         Repeater {
                             id: headerRowRepeater
                             model: catgrayquickTableViewModel.headerCount

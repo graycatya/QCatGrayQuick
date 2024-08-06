@@ -43,4 +43,5 @@ CatChatTextEdit 1.0 Qml/CatChat/CatChatTextEdit.qml
 CatTableView 1.0 Qml/CatTableView/CatTableView.qml
 CatTableViewDelegateBase 1.0 Qml/CatTableView/CatTableViewDelegateBase.qml
 CatTableViewHeaderDelegateBase 1.0 Qml/CatTableView/CatTableViewHeaderDelegateBase.qml
+CatTableViewItemBase 1.0 Qml/CatTableView/CatTableViewItemBase.qml
 QCatGrayQuickStyle 1.0 Qml/QCatGrayQuickStyle.qml

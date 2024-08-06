@@ -5,7 +5,7 @@
 QCatGrayQuickTableViewModel::QCatGrayQuickTableViewModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-
+    InitConnect();
 }
 
 QCatGrayQuickTableViewModel::~QCatGrayQuickTableViewModel()
@@ -45,6 +45,12 @@ QVariant QCatGrayQuickTableViewModel::data(const QModelIndex &index, int role) c
 QCatGrayQuickTableViewModelStruct *QCatGrayQuickTableViewModel::appendStruct(QJsonObject object)
 {
     QCatGrayQuickTableViewModelStruct *t_struct = new QCatGrayQuickTableViewModelStruct(this);
+    connect(this, &QCatGrayQuickTableViewModel::setAllItemPreferredHeighted,
+            t_struct, &QCatGrayQuickTableViewModelStruct::setPreferredHeight);
+    connect(this, &QCatGrayQuickTableViewModel::setAllItemMinimumHeighted,
+            t_struct, &QCatGrayQuickTableViewModelStruct::setMinimumHeight);
+    connect(this, &QCatGrayQuickTableViewModel::setAllItemMaximumHeighted,
+            t_struct, &QCatGrayQuickTableViewModelStruct::setMaximumHeight);
     t_struct->setdata(object);
     beginInsertRows(QModelIndex(), m_StructList.count(), m_StructList.count());
     m_StructList.insert(m_StructList.count(), QSharedPointer<QCatGrayQuickTableViewModelStruct>(t_struct));
@@ -89,6 +95,12 @@ void QCatGrayQuickTableViewModel::setHeaderCount(int headerCount)
         for(int i = 0; i < m_HeaderCount; i++)
         {
             QCatGrayQuickTableViewHeaderStruct *t_struct = new QCatGrayQuickTableViewHeaderStruct(this);
+            connect(this, &QCatGrayQuickTableViewModel::setAllHeaderPreferredWidthed,
+                    t_struct, &QCatGrayQuickTableViewHeaderStruct::setPreferredWidth);
+            connect(this, &QCatGrayQuickTableViewModel::setAllHeaderMinimumWidthed,
+                    t_struct, &QCatGrayQuickTableViewHeaderStruct::setMinimumWidth);
+            connect(this, &QCatGrayQuickTableViewModel::setAllHeaderMaximumWidthed,
+                    t_struct, &QCatGrayQuickTableViewHeaderStruct::setMaximumWidth);
             m_headerStruct.insert(m_headerStruct.count(), QSharedPointer<QCatGrayQuickTableViewHeaderStruct>(t_struct));
         }
         emit headerCountChanged();
@@ -104,11 +116,49 @@ QCatGrayQuickTableViewHeaderStruct *QCatGrayQuickTableViewModel::getHeaderStruct
     return nullptr;
 }
 
+void QCatGrayQuickTableViewModel::setAllHeaderPreferredWidth(int width)
+{
+    emit setAllHeaderPreferredWidthed(width);
+}
+
+void QCatGrayQuickTableViewModel::setAllHeaderMinimumWidth(int width)
+{
+    emit setAllHeaderMinimumWidthed(width);
+}
+
+void QCatGrayQuickTableViewModel::setAllHeaderMaximumWidth(int width)
+{
+    emit setAllHeaderMaximumWidthed(width);
+}
+
+void QCatGrayQuickTableViewModel::setAllItemPreferredHeight(int height)
+{
+    emit setAllItemPreferredHeighted(height);
+}
+
+void QCatGrayQuickTableViewModel::setAllItemMinimumHeight(int height)
+{
+    emit setAllItemMinimumHeighted(height);
+}
+
+void QCatGrayQuickTableViewModel::setAllItemMaximumHeight(int height)
+{
+    emit setAllItemMaximumHeighted(height);
+}
+
 void QCatGrayQuickTableViewModel::setPreferredHeaderHeight(int height)
 {
     if(m_PreferredHeaderHeight != height)
     {
         m_PreferredHeaderHeight = height;
+        if(m_PreferredHeaderHeight < m_MinimumHeaderHeight)
+        {
+            m_PreferredHeaderHeight = m_MinimumHeaderHeight;
+        }
+        if(m_PreferredHeaderHeight > m_MaximumHeaderHeight)
+        {
+            m_PreferredHeaderHeight = m_MaximumHeaderHeight;
+        }
         emit preferredHeaderHeightChanged();
     }
 }
@@ -118,6 +168,11 @@ void QCatGrayQuickTableViewModel::setMinimumHeaderHeight(int height)
     if(m_MinimumHeaderHeight != height)
     {
         m_MinimumHeaderHeight = height;
+        if(m_PreferredHeaderHeight < m_MinimumHeaderHeight)
+        {
+            m_PreferredHeaderHeight = m_MinimumHeaderHeight;
+            emit preferredHeaderHeightChanged();
+        }
         emit minimumHeaderHeightChanged();
     }
 }
@@ -127,6 +182,64 @@ void QCatGrayQuickTableViewModel::setMaximumHeaderHeight(int height)
     if(m_MaximumHeaderHeight != height)
     {
         m_MaximumHeaderHeight = height;
+        if(m_PreferredHeaderHeight > m_MaximumHeaderHeight)
+        {
+            m_PreferredHeaderHeight = m_MaximumHeaderHeight;
+            emit preferredHeaderHeightChanged();
+        }
         emit maximumHeaderHeightChanged();
+    }
+}
+
+void QCatGrayQuickTableViewModel::setFlickableWidth(int width)
+{
+    if(m_FlickableWidth != width)
+    {
+        if(m_FlickableWidth < 0)
+        {
+            m_FlickableWidth = 0;
+        }
+        m_FlickableWidth = width;
+        emit flickableWidthChanged();
+        UpdateHeaderStruct();
+    }
+}
+
+void QCatGrayQuickTableViewModel::InitConnect()
+{
+
+}
+
+void QCatGrayQuickTableViewModel::UpdateHeaderStruct()
+{
+    int notstretchwidths = 0, totalheaderWidth = 0;
+    QList<int> headerStretchIndexs;
+    for(int i = 0; i < m_headerStruct.length(); i++)
+    {
+        if(m_headerStruct.at(i).get()->resizeMode() == QCatGrayQuickTableViewHeaderStruct::Stretch)
+        {
+            headerStretchIndexs.append(i);
+        } else {
+            notstretchwidths = notstretchwidths + m_headerStruct.at(i).get()->preferredWidth();
+        }
+        totalheaderWidth = totalheaderWidth + m_headerStruct.at(i).get()->preferredWidth();
+    }
+    if(!headerStretchIndexs.isEmpty())
+    {
+        qDebug() << "totalheaderWidth: " << totalheaderWidth;
+        if(m_FlickableWidth > totalheaderWidth)
+        {
+            int allstretchwidth = m_FlickableWidth - notstretchwidths;
+            int stretchwidth = allstretchwidth / headerStretchIndexs.size();
+            foreach (int index, headerStretchIndexs) {
+                m_headerStruct.at(index).get()->setPreferredWidth(stretchwidth);
+            }
+        } else {
+            int allstretchwidth = m_FlickableWidth - notstretchwidths;
+            int stretchwidth = allstretchwidth / headerStretchIndexs.size();
+            foreach (int index, headerStretchIndexs) {
+                m_headerStruct.at(index).get()->setPreferredWidth(stretchwidth);
+            }
+        }
     }
 }

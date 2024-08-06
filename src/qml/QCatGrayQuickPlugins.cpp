@@ -18,7 +18,7 @@ void QCatGrayQuickPlugins::InitQCatGrayQuickPlugins(QQmlApplicationEngine * engi
 {
     engine->addImportPath(QCatGrayQuickImportPath);
 #ifdef QCATGRAYQUICKTABLEVIEWMODEL_TARGET
-    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewHeaderStruct", 1, 0, "QCatGrayQuickTableViewHeaderStruct");
+    qmlRegisterType<QCatGrayQuickTableViewHeaderStruct>("com.catgray.QCatGrayQuickTableViewHeaderStruct", 1, 0, "QCatGrayQuickTableViewHeaderStruct");
     qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewModelStruct", 1, 0, "QCatGrayQuickTableViewModelStruct");
     qmlRegisterType<QCatGrayQuickTableViewModel>("com.catgray.QCatGrayQuickTableViewModel", 1, 0, "QCatGrayQuickTableViewModel");
 #endif
@@ -28,7 +28,7 @@ void QCatGrayQuickPlugins::InitQCatGrayQuickPlugins(QQmlEngine *engine)
 {
     engine->addImportPath(QCatGrayQuickImportPath);
 #ifdef QCATGRAYQUICKTABLEVIEWMODEL_TARGET
-    qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewHeaderStruct", 1, 0, "QCatGrayQuickTableViewHeaderStruct");
+    qmlRegisterType<QCatGrayQuickTableViewHeaderStruct>("com.catgray.QCatGrayQuickTableViewHeaderStruct", 1, 0, "QCatGrayQuickTableViewHeaderStruct");
     qmlRegisterType<QCatGrayQuickTableViewModelStruct>("com.catgray.QCatGrayQuickTableViewModelStruct", 1, 0, "QCatGrayQuickTableViewModelStruct");
     qmlRegisterType<QCatGrayQuickTableViewModel>("com.catgray.QCatGrayQuickTableViewModel", 1, 0, "QCatGrayQuickTableViewModel");
 #endif
