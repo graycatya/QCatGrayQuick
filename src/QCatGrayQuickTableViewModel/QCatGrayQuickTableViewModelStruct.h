@@ -22,13 +22,12 @@ public:
     Q_INVOKABLE void setdata(QJsonObject data);
     QJsonObject data() const { return m_Data; }
 
-    virtual Q_INVOKABLE QVariant columnData(quint32 column) {
-        Q_UNUSED(column)
-        if(m_Data.keys().length() <= column && column < 0)
+    virtual Q_INVOKABLE QVariant rowData(quint32 row) {
+        if(m_Data.keys().length() <= row && row < 0)
         {
             return QVariant();
         }
-        return m_Data.value(m_Data.keys().value(column));
+        return m_Data.value(m_Data.keys().value(row));
     }
 
     Q_INVOKABLE int length() const { return m_Data.keys().length(); }

@@ -3,105 +3,104 @@ import QtQuick.Layouts 1.12
 import com.catgray.QCatGrayQuickTableViewModel 1.0
 import com.catgray.QCatGrayQuickTableViewModelStruct 1.0
 import com.catgray.QCatGrayQuickTableViewHeaderStruct 1.0
+import "../QCatGrayQuickMethod.js" as QCatGrayQuickMethod
 
 Item {
     id: root
-    readonly property int columnIndex: parent.columnRepeaterIndex
-    readonly property int rowIndex: index
+    clip: true
+    readonly property bool isNotNull: parent != null
+    readonly property int columnIndex: isNotNull ? parent.columnRepeaterIndex : 0
+    readonly property int rowIndex: isNotNull ? index : 0
     readonly property bool isheaderFreeze: columnIndex == 0
-    readonly property var model: parent.parent.datamodel
-    readonly property QCatGrayQuickTableViewHeaderStruct headerStruct: model.getHeaderStruct(columnIndex)
-    readonly property var headerData: parent.headerData
-    readonly property var viewScrol: parent.parent.viewScrol
-//    Connections {
-//        target: model.getHeaderStruct(rowIndex)
-//        function onPreferredWidthChanged() {
-//            root.width = model.getHeaderStruct(columnIndex).preferredWidth
-//        }
-//    }
-    width: model.getHeaderStruct(rowIndex).preferredWidth
-    height: model.preferredHeaderHeight
+    readonly property var datamodel: isNotNull ?
+                                         parent.parent ? parent.parent.datamodel : null : null
+    readonly property QCatGrayQuickTableViewHeaderStruct headerStruct: isNotNull ?
+                                                                           datamodel ?
+                                                                               datamodel.getHeaderStruct(columnIndex) : null : null
+    readonly property var headerData: isNotNull ? parent.headerData : null
+    readonly property var viewScrol: isNotNull ?
+                                         parent.parent ? parent.parent.viewScrol : null : null
+    property alias source : loader.source
+    property alias sourceComponent : loader.sourceComponent
+    property int lastwidth: 0
 
-    // Rectangle {
-    //     anchors.top: parent.top
-    //     anchors.bottom: parent.bottom
-    //     anchors.left: parent.left
-    //     width: 2
-    //     z: 99999
-    //     color: "#FFFFFF"
-    //     MouseArea {
-    //         anchors.fill: parent
-    //         hoverEnabled: true
-    //         propagateComposedEvents: true
-    //         onDoubleClicked: { mouse.accepted = false;}
-    //         onPositionChanged: { mouse.accepted = false;}
-    //         onPressed:  {  mouse.accepted = false; }
-    //         onPressAndHold: { mouse.accepted = false; }
-    //         onClicked:  { mouse.accepted = false;}
-    //         onReleased: { mouse.accepted = false;}
-    //         onWheel: { wheel.accepted = false; }
-    //         onEntered: { cursorShape = Qt.SizeHorCursor }
-    //         onExited: { cursorShape = Qt.ArrowCursor }
-    //     }
-    // }
+    width: datamodel !== null ? datamodel.getHeaderStruct(rowIndex).preferredWidth : 0
+    height: datamodel !== null ? datamodel.preferredHeaderHeight : 0
+
+    //property bool isadd: false
+
+    Loader {
+        id: loader
+        objectName: "headerLoader"
+        readonly property int columnIndex: root.columnIndex
+        readonly property int rowIndex: root.rowIndex
+        readonly property int index: root.rowIndex
+        readonly property var datamodel: isNotNull ?
+                                             parent.parent.parent ? parent.parent.parent.datamodel : null : null
+        anchors.fill: parent
+    }
 
     Rectangle {
         id: rightrect
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        width: 2
-        z: 99999
+        width: 4
+        //z: 99999
         color: "#01FFFFFF"
         property real lastmouseX: 0
         property real lastmouseY: 0
-        visible: model.getHeaderStruct(rowIndex).resizeMode === QCatGrayQuickTableViewHeaderStruct.FixedCanBeManuallyAdjusted
-        onFocusChanged: {
-            console.log("rightrect.focus: " + rightrect.focus)
-        }
+        visible: datamodel !== null ?
+                     datamodel.getHeaderStruct(rowIndex).resizeMode === QCatGrayQuickTableViewHeaderStruct.FixedCanBeManuallyAdjusted : false
+
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            propagateComposedEvents: false
-            //propagateComposedEvents: true
-            // drag.target: parent
-            // onPositionChanged: {
-            //     mouse.accepted = false;
-            //     if (parent.drag.active) {
-            //         parent.x = dragArea.x - (parent.width / 2);
-            //         parent.y = dragArea.y - (parent.height / 2);
-            //     }
-            // }
+            propagateComposedEvents: true
+
             onPositionChanged: {
                 if(pressed)
                 {
-                    model.setOverrideCursor(Qt.SizeHorCursor);
-                    //console.log("onPositionChanged:"+(mouseX - rightrect.lastmouseX)+":"+(mouseY - rightrect.lastmouseY))
-                    model.getHeaderStruct(rowIndex).preferredWidth = model.getHeaderStruct(rowIndex).preferredWidth + (mouseX - rightrect.lastmouseX)
+                    var loastwidthmove = datamodel.getHeaderStruct(rowIndex).preferredWidth  - root.lastwidth;
+                    var twidth = datamodel.getHeaderStruct(rowIndex).preferredWidth;
+                    var movex = mouseX - rightrect.lastmouseX + loastwidthmove;
                     rightrect.lastmouseX = mouseX;
                     rightrect.lastmouseY = mouseY;
+                    if(movex != 0)
+                    {
+                        root.lastwidth = root.width;
+                        datamodel.getHeaderStruct(rowIndex).preferredWidth = twidth + movex
+                        datamodel.updateHeaderStruct();
+                    }
                 }
-                mouse.accepted = true
             }
             onPressed:  {
                 rightrect.lastmouseX = mouseX;
                 rightrect.lastmouseY = mouseY;
-                mouse.accepted = true
+                root.lastwidth = root.width
                 viewScrol.interactive = false
+                mouse.accepted = true
+
             }
             onReleased: {
                 viewScrol.interactive = true
-                model.setOverrideCursor(Qt.ArrowCursor);
+                datamodel.setOverrideCursor(Qt.ArrowCursor);
             }
             onEntered: {
-                model.setOverrideCursor(Qt.SizeHorCursor);
+                datamodel.setOverrideCursor(Qt.SizeHorCursor);
             }
             onExited: {
-                if(!containsPress)
+                if(!pressed)
                 {
-                    model.setOverrideCursor(Qt.ArrowCursor);
+                    datamodel.setOverrideCursor(Qt.ArrowCursor);
                 }
             }
         }
+    }
+
+    Component.onDestruction: {
+        console.log("isNotNull: " + QCatGrayQuickMethod.parentStackIsNull(parent))
+        root.source = ""
+        root.sourceComponent = null
     }
 }

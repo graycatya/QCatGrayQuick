@@ -8,6 +8,7 @@
 class QCatGrayQuickTableViewModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> tabledata READ tabledata  NOTIFY tabledataChanged)
     Q_PROPERTY(uint headerCount READ headerCount WRITE setHeaderCount NOTIFY headerCountChanged)
     Q_PROPERTY(int preferredHeaderHeight READ preferredHeaderHeight WRITE setPreferredHeaderHeight NOTIFY preferredHeaderHeightChanged)
     Q_PROPERTY(int minimumHeaderHeight READ minimumHeaderHeight WRITE setMinimumHeaderHeight NOTIFY minimumHeaderHeightChanged)
@@ -53,9 +54,12 @@ public:
 
     Q_INVOKABLE void setOverrideCursor(Qt::CursorShape shape);
 
+    Q_INVOKABLE void updateHeaderStruct();
+
+    Q_INVOKABLE QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> tabledata() const { return m_StructList; }
+
 private:
     void InitConnect();
-    void UpdateHeaderStruct();
 
 signals:
     void headerCountChanged();
@@ -72,6 +76,8 @@ signals:
     void setAllItemMaximumHeighted(int height);
 
     void flickableWidthChanged();
+
+    void tabledataChanged();
 
 
 private:

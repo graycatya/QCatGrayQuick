@@ -45,3 +45,4 @@ CatTableViewDelegateBase 1.0 Qml/CatTableView/CatTableViewDelegateBase.qml
 CatTableViewHeaderDelegateBase 1.0 Qml/CatTableView/CatTableViewHeaderDelegateBase.qml
 CatTableViewItemBase 1.0 Qml/CatTableView/CatTableViewItemBase.qml
 QCatGrayQuickStyle 1.0 Qml/QCatGrayQuickStyle.qml
+javascript Qml/QCatGrayQuickMethod.js

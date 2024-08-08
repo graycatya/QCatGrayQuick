@@ -57,6 +57,7 @@ QCatGrayQuickTableViewModelStruct *QCatGrayQuickTableViewModel::appendStruct(QJs
     beginInsertRows(QModelIndex(), m_StructList.count(), m_StructList.count());
     m_StructList.insert(m_StructList.count(), QSharedPointer<QCatGrayQuickTableViewModelStruct>(t_struct));
     endInsertRows();
+    emit tabledataChanged();
     return t_struct;
 }
 
@@ -79,6 +80,7 @@ void QCatGrayQuickTableViewModel::removeStruct(int index)
     beginRemoveRows(QModelIndex(),m_StructList.count(),m_StructList.count());
     m_StructList.removeAt(index);
     endRemoveRows();
+    emit tabledataChanged();
 }
 
 void QCatGrayQuickTableViewModel::clearModel()
@@ -86,6 +88,7 @@ void QCatGrayQuickTableViewModel::clearModel()
     beginResetModel();
     m_StructList.clear();
     endResetModel();
+    emit tabledataChanged();
 }
 
 void QCatGrayQuickTableViewModel::setHeaderCount(int headerCount)
@@ -103,6 +106,10 @@ void QCatGrayQuickTableViewModel::setHeaderCount(int headerCount)
                     t_struct, &QCatGrayQuickTableViewHeaderStruct::setMinimumWidth);
             connect(this, &QCatGrayQuickTableViewModel::setAllHeaderMaximumWidthed,
                     t_struct, &QCatGrayQuickTableViewHeaderStruct::setMaximumWidth);
+            connect(t_struct, &QCatGrayQuickTableViewHeaderStruct::preferredWidthChanged,
+                    this, [=](){
+                //updateHeaderStruct();
+            });
             m_headerStruct.insert(m_headerStruct.count(), QSharedPointer<QCatGrayQuickTableViewHeaderStruct>(t_struct));
         }
         emit headerCountChanged();
@@ -203,7 +210,7 @@ void QCatGrayQuickTableViewModel::setFlickableWidth(int width)
         }
         m_FlickableWidth = width;
         emit flickableWidthChanged();
-        UpdateHeaderStruct();
+        updateHeaderStruct();
     }
 }
 
@@ -212,12 +219,7 @@ void QCatGrayQuickTableViewModel::setOverrideCursor(Qt::CursorShape shape)
     static_cast<QGuiApplication*>(QGuiApplication::instance())->setOverrideCursor(QCursor(shape));
 }
 
-void QCatGrayQuickTableViewModel::InitConnect()
-{
-
-}
-
-void QCatGrayQuickTableViewModel::UpdateHeaderStruct()
+void QCatGrayQuickTableViewModel::updateHeaderStruct()
 {
     int notstretchwidths = 0, totalheaderWidth = 0;
     QList<int> headerStretchIndexs;
@@ -233,7 +235,7 @@ void QCatGrayQuickTableViewModel::UpdateHeaderStruct()
     }
     if(!headerStretchIndexs.isEmpty())
     {
-        qDebug() << "totalheaderWidth: " << totalheaderWidth;
+
         if(m_FlickableWidth > totalheaderWidth)
         {
             int allstretchwidth = m_FlickableWidth - notstretchwidths;
@@ -250,3 +252,9 @@ void QCatGrayQuickTableViewModel::UpdateHeaderStruct()
         }
     }
 }
+
+void QCatGrayQuickTableViewModel::InitConnect()
+{
+
+}
+
