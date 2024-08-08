@@ -31,6 +31,7 @@ Rectangle {
 
     Flickable {
         id: itemviewScrol
+        //interactive: false
         boundsBehavior: Flickable.StopAtBounds
         anchors.fill: parent
         contentWidth: headerColumn.implicitWidth
@@ -38,6 +39,8 @@ Rectangle {
 
         ScrollBar.vertical: ScrollBar{}
         ScrollBar.horizontal: ScrollBar{}
+
+
 
         Column {
             id: tableLayout
@@ -59,10 +62,12 @@ Rectangle {
             width: headerColumn.implicitWidth
             height: headerColumn.implicitHeight
             color: "transparent"
+
             Column {
                 id: headerColumn
                 spacing: 0
                 readonly property alias datamodel: catgrayquickTableViewModel
+                readonly property alias viewScrol: itemviewScrol
                 Repeater {
                     id: headerColumnRepeater
                     model: root.columnfreezeNum
@@ -72,6 +77,7 @@ Rectangle {
                         spacing: 0
                         readonly property int columnRepeaterIndex: index
                         readonly property var headerData: root.headerData
+
                         Repeater {
                             id: headerRowRepeater
                             model: catgrayquickTableViewModel.headerCount

@@ -1,5 +1,7 @@
 #include "QCatGrayQuickTableViewModel.h"
 #include <QQmlEngine>
+#include <QGuiApplication>
+#include <QCursor>
 
 
 QCatGrayQuickTableViewModel::QCatGrayQuickTableViewModel(QObject *parent)
@@ -203,6 +205,11 @@ void QCatGrayQuickTableViewModel::setFlickableWidth(int width)
         emit flickableWidthChanged();
         UpdateHeaderStruct();
     }
+}
+
+void QCatGrayQuickTableViewModel::setOverrideCursor(Qt::CursorShape shape)
+{
+    static_cast<QGuiApplication*>(QGuiApplication::instance())->setOverrideCursor(QCursor(shape));
 }
 
 void QCatGrayQuickTableViewModel::InitConnect()

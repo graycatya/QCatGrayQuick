@@ -51,6 +51,8 @@ public:
     int flickableWidth() const { return m_FlickableWidth; }
     Q_INVOKABLE void setFlickableWidth(int width);
 
+    Q_INVOKABLE void setOverrideCursor(Qt::CursorShape shape);
+
 private:
     void InitConnect();
     void UpdateHeaderStruct();
