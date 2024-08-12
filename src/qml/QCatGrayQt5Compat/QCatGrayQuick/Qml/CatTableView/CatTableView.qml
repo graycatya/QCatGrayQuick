@@ -38,7 +38,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        z:3
+        z: 3
     }
 
     Item {
@@ -59,30 +59,8 @@ Rectangle {
                 id: headerRow
                 Repeater {
                     id: headerList
-                    anchors.fill: parent
-                    // boundsBehavior: Flickable.StopAtBounds
-                    // orientation: ListView.Horizontal
                     model: catgrayquickTableViewModel.headerTableData
-                    delegate: Rectangle {
-                        width: catgrayquickTableViewModel.getHeaderStruct(index).preferredWidth
-                        height: catgrayquickTableViewModel.preferredHeaderHeight
-
-                        border.color: "#FFFFFF"
-                        border.width: 1
-                        color: "#666666"
-                        Text {
-                           anchors.fill: parent
-                           verticalAlignment: Text.AlignVCenter
-                           horizontalAlignment: Text.AlignHCenter
-                           text: catgrayquickTableViewModel.headerTableData[index]
-                           color: "#FFFFFF"
-                           font.pixelSize: 16
-
-                        }
-
-                    }
-
-
+                    delegate: root.headerDelegate
                 }
             }
         }
@@ -91,7 +69,6 @@ Rectangle {
     TableView {
         id: tableListView
         clip: true
-        //anchors.fill: parent
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -102,43 +79,10 @@ Rectangle {
         rowSpacing: 0
         ScrollBar.vertical: tableverticalScrollBar
         ScrollBar.horizontal: tablehorizontalScrollBar
+        contentWidth: headerRow.implicitWidth
         model: catgrayquickTableViewModel
 
-        delegate: Item {
-            id: delitem
-            property int columnindex: index
-            implicitWidth: dataRow.implicitWidth
-            implicitHeight: catgrayquickTableViewModel.getStruct(columnindex).preferredHeight
-
-                Row {
-                    id: dataRow
-                    Repeater {
-                        id: dataRepeater
-                        // anchors.fill: parent
-                        // boundsBehavior: Flickable.StopAtBounds
-                        // orientation: ListView.Horizontal
-                        model: catgrayquickTableViewModel.headerTableData
-                        delegate: Rectangle {
-                            width: catgrayquickTableViewModel.getHeaderStruct(index).preferredWidth
-                            height: catgrayquickTableViewModel.getStruct(columnindex).preferredHeight
-                            border.color: "#FFFFFF"
-                            border.width: 1
-                            color: "#000000"
-                            Text {
-                               anchors.fill: parent
-                               verticalAlignment: Text.AlignVCenter
-                               horizontalAlignment: Text.AlignHCenter
-                               text: catgrayquickTableViewModel.getStruct(columnindex).data[catgrayquickTableViewModel.headerTableData[index]]
-                               color: "#FFFFFF"
-                               font.pixelSize: 16
-
-                            }
-                        }
-                    }
-                }
-
-        }
-
+        delegate: root.delegate
     }
 
 

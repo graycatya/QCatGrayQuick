@@ -1,22 +1,26 @@
 import QtQuick 2.12
+import com.catgray.QCatGrayQuickTableViewModel 1.0
+import com.catgray.QCatGrayQuickTableViewModelStruct 1.0
+import com.catgray.QCatGrayQuickTableViewHeaderStruct 1.0
 
-Item {
+Rectangle {
     id: root
+    color: "transparent"
     clip: true
-    readonly property var headerData: parent.headerData
-    readonly property var datamodel: parent.datamodel
-    property alias delegate: tableItemRepeater.delegate
-    readonly property int columnIndex: index
-    width: rowRepeater.implicitWidth
-    height: rowRepeater.implicitHeight
+    property int columnindex: -1
+    property var datamodel: null
+    property Component delegate: null
+    width: dataRow.implicitWidth
+    implicitWidth: dataRow.implicitWidth
+    implicitHeight: datamodel ? datamodel.getStruct(columnindex).preferredHeight : 0
+
     Row {
-        id: rowRepeater
-        readonly property int columnIndex: root.columnIndex
-        readonly property var datamodel: root.datamodel
-        readonly property var headerData: root.headerData
+        id: dataRow
         Repeater {
-            id: tableItemRepeater
-            model: datamodel.headerCount
+            id: dataRepeater
+            model: datamodel ? datamodel.headerTableData : 0
+            delegate: root.delegate
         }
     }
+
 }
