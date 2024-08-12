@@ -75,6 +75,7 @@ Item {
                 }
             }
             onPressed:  {
+                datamodel.setOverrideCursor(Qt.SizeHorCursor);
                 rightrect.lastmouseX = mouseX;
                 rightrect.lastmouseY = mouseY;
                 root.lastwidth = root.width
@@ -84,7 +85,7 @@ Item {
             }
             onReleased: {
                 viewScrol.interactive = true
-                datamodel.setOverrideCursor(Qt.ArrowCursor);
+                datamodel.restoreOverrideCursor();
             }
             onEntered: {
                 datamodel.setOverrideCursor(Qt.SizeHorCursor);
@@ -92,14 +93,13 @@ Item {
             onExited: {
                 if(!pressed)
                 {
-                    datamodel.setOverrideCursor(Qt.ArrowCursor);
+                    datamodel.restoreOverrideCursor();
                 }
             }
         }
     }
 
     Component.onDestruction: {
-        console.log("isNotNull: " + QCatGrayQuickMethod.parentStackIsNull(parent))
         root.source = ""
         root.sourceComponent = null
     }

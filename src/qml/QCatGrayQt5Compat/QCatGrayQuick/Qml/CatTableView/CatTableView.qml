@@ -5,151 +5,142 @@ import com.catgray.QCatGrayQuickTableViewModel 1.0
 
 Rectangle {
     id: root
-    property alias viewLayout: tableLayout
-    property alias viewScrol: itemviewScrol
+    //property alias viewScrol: itemviewScrol
     //property alias viewRepeater: tableRepeater
     readonly property alias model: catgrayquickTableViewModel
     property Component delegate: null
-    property var headerData: []
+    property alias headerData: catgrayquickTableViewModel.headerTableData
     property Component headerDelegate: null
     property bool freezeHeader: true
     property int columnfreezeNum: 0
+    property int leftbottomfreezeNum: 0
 
     color: "transparent"
-    clip: true
-
-    onHeaderDataChanged: {
-        catgrayquickTableViewModel.headerCount = headerData.length
-    }
+    //clip: true
 
     QCatGrayQuickTableViewModel {
         id: catgrayquickTableViewModel
-        flickableWidth: itemviewScrol.width
-        onDataChanged: {
+        flickableWidth: root.width
+    }
 
+
+
+    ScrollBar {
+        id: tablehorizontalScrollBar
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+        z: 3
+    }
+
+    ScrollBar {
+        id: tableverticalScrollBar
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        z:3
+    }
+
+    Item {
+        id: headeritem
+        width: tableListView.width
+        height: catgrayquickTableViewModel.preferredHeaderHeight
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        z:2
+        clip: true
+        Flickable {
+            anchors.fill: parent
+            boundsBehavior: Flickable.StopAtBounds
+            ScrollBar.horizontal: tablehorizontalScrollBar
+            contentWidth: headerRow.implicitWidth
+            Row {
+                id: headerRow
+                Repeater {
+                    id: headerList
+                    anchors.fill: parent
+                    // boundsBehavior: Flickable.StopAtBounds
+                    // orientation: ListView.Horizontal
+                    model: catgrayquickTableViewModel.headerTableData
+                    delegate: Rectangle {
+                        width: catgrayquickTableViewModel.getHeaderStruct(index).preferredWidth
+                        height: catgrayquickTableViewModel.preferredHeaderHeight
+
+                        border.color: "#FFFFFF"
+                        border.width: 1
+                        color: "#666666"
+                        Text {
+                           anchors.fill: parent
+                           verticalAlignment: Text.AlignVCenter
+                           horizontalAlignment: Text.AlignHCenter
+                           text: catgrayquickTableViewModel.headerTableData[index]
+                           color: "#FFFFFF"
+                           font.pixelSize: 16
+
+                        }
+
+                    }
+
+
+                }
+            }
         }
     }
 
-    Flickable {
-        id: itemviewScrol
+    TableView {
+        id: tableListView
+        clip: true
+        //anchors.fill: parent
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: catgrayquickTableViewModel.preferredHeaderHeight
         boundsBehavior: Flickable.StopAtBounds
-        anchors.fill: parent
-        contentWidth: root.freezeHeader ? headerColumn.implicitWidth : tableLayout.implicitWidth
-        contentHeight: {
-            if(!root.freezeHeader)
-            {
-                    return tableLayout.implicitHeight;
-            }
-            return tableLayout.implicitHeight + catgrayquickTableViewModel.preferredHeaderHeight;
-        }
-        ScrollBar.vertical: ScrollBar{}
-        ScrollBar.horizontal: ScrollBar{}
+        columnSpacing: 0
+        rowSpacing: 0
+        ScrollBar.vertical: tableverticalScrollBar
+        ScrollBar.horizontal: tablehorizontalScrollBar
+        model: catgrayquickTableViewModel
 
-        Column {
-            id: tableLayout
-            anchors.top: parent.top
-            anchors.topMargin: root.freezeHeader ? catgrayquickTableViewModel.preferredHeaderHeight : 0
-            readonly property alias datamodel: catgrayquickTableViewModel
-            readonly property var headerData: root.headerData
-            Repeater {
-                id: tableRepeater
-                model: catgrayquickTableViewModel
+        delegate: Item {
+            id: delitem
+            property int columnindex: index
+            implicitWidth: dataRow.implicitWidth
+            implicitHeight: catgrayquickTableViewModel.getStruct(columnindex).preferredHeight
 
-                CatTableViewDelegateBase {
-                    delegate: root.delegate
-                }
+                Row {
+                    id: dataRow
+                    Repeater {
+                        id: dataRepeater
+                        // anchors.fill: parent
+                        // boundsBehavior: Flickable.StopAtBounds
+                        // orientation: ListView.Horizontal
+                        model: catgrayquickTableViewModel.headerTableData
+                        delegate: Rectangle {
+                            width: catgrayquickTableViewModel.getHeaderStruct(index).preferredWidth
+                            height: catgrayquickTableViewModel.getStruct(columnindex).preferredHeight
+                            border.color: "#FFFFFF"
+                            border.width: 1
+                            color: "#000000"
+                            Text {
+                               anchors.fill: parent
+                               verticalAlignment: Text.AlignVCenter
+                               horizontalAlignment: Text.AlignHCenter
+                               text: catgrayquickTableViewModel.getStruct(columnindex).data[catgrayquickTableViewModel.headerTableData[index]]
+                               color: "#FFFFFF"
+                               font.pixelSize: 16
 
-            }
-
-        }
-
-        Rectangle {
-            id: headerItem
-            y: itemviewScrol.contentY
-            anchors.left: parent.left
-            width: headerColumn.implicitWidth
-            height: headerColumn.implicitHeight
-            color: "transparent"
-
-            Column {
-                id: headerColumn
-                spacing: 0
-                readonly property alias datamodel: catgrayquickTableViewModel
-                readonly property alias viewScrol: itemviewScrol
-
-                Repeater {
-                    id: headerColumnRepeater
-                    model: //root.columnfreezeNum + 1
-                    {
-                        var freezenum = 0;
-                        if(root.freezeHeader)
-                        {
-                            if(catgrayquickTableViewModel.tabledata.length > 0 && catgrayquickTableViewModel.data.length < root.columnfreezeNum)
-                            {
-                                freezenum = root.columnfreezeNum + 1;
-                            } else {
-                                freezenum = 1;
                             }
                         }
-                        console.log("freezenum: " + freezenum)
-                        return freezenum;
                     }
-
-                    Row {
-                        id: headerRow
-                        spacing: 0
-                        readonly property int columnRepeaterIndex: index
-                        readonly property var headerData: root.headerData
-
-                        Repeater {
-                            id: headerRowRepeater
-                            model: catgrayquickTableViewModel.headerCount
-                            delegate: root.headerDelegate
-                        }
-
-                    }
-
                 }
-            }
 
         }
 
-//        Rectangle {
-//            id: headerItem
-//            y: itemviewScrol.contentY
-//            anchors.left: parent.left
-//            width: headerColumn.implicitWidth
-//            height: headerColumn.implicitHeight
-//            color: "transparent"
-
-//            Column {
-//                id: headerColumn
-//                spacing: 0
-//                readonly property alias datamodel: catgrayquickTableViewModel
-//                readonly property alias viewScrol: itemviewScrol
-
-//                Repeater {
-//                    id: headerColumnRepeater
-//                    model: root.columnfreezeNum
-
-//                    Row {
-//                        id: headerRow
-//                        spacing: 0
-//                        readonly property int columnRepeaterIndex: index
-//                        readonly property var headerData: root.headerData
-
-//                        Repeater {
-//                            id: headerRowRepeater
-//                            model: catgrayquickTableViewModel.headerCount
-//                            delegate: root.headerDelegate
-//                        }
-
-//                    }
-
-//                }
-//            }
-
-//        }
-
     }
+
+
+
 }

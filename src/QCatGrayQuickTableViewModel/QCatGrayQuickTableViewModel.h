@@ -9,7 +9,7 @@ class QCatGrayQuickTableViewModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> tabledata READ tabledata  NOTIFY tabledataChanged)
-    Q_PROPERTY(uint headerCount READ headerCount WRITE setHeaderCount NOTIFY headerCountChanged)
+    Q_PROPERTY(QStringList headerTableData READ headerTableData WRITE setHeaderTableData NOTIFY headerTableDataChanged)
     Q_PROPERTY(int preferredHeaderHeight READ preferredHeaderHeight WRITE setPreferredHeaderHeight NOTIFY preferredHeaderHeightChanged)
     Q_PROPERTY(int minimumHeaderHeight READ minimumHeaderHeight WRITE setMinimumHeaderHeight NOTIFY minimumHeaderHeightChanged)
     Q_PROPERTY(int maximumHeaderHeight READ maximumHeaderHeight WRITE setMaximumHeaderHeight NOTIFY maximumHeaderHeightChanged)
@@ -28,8 +28,6 @@ public:
     Q_INVOKABLE void removeStruct(int index);
     Q_INVOKABLE void clearModel();
 
-    int headerCount() const { return m_HeaderCount; }
-    Q_INVOKABLE void setHeaderCount(int headerCount);
     Q_INVOKABLE QCatGrayQuickTableViewHeaderStruct* getHeaderStruct(int index);
 
     Q_INVOKABLE void setAllHeaderPreferredWidth(int width);
@@ -54,9 +52,15 @@ public:
 
     Q_INVOKABLE void setOverrideCursor(Qt::CursorShape shape);
 
+    Q_INVOKABLE void restoreOverrideCursor();
+
     Q_INVOKABLE void updateHeaderStruct();
 
     Q_INVOKABLE QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> tabledata() const { return m_StructList; }
+
+    Q_INVOKABLE QStringList headerTableData() const { return m_headerTableData; }
+    Q_INVOKABLE void setHeaderTableData(QStringList data);
+
 
 private:
     void InitConnect();
@@ -79,11 +83,13 @@ signals:
 
     void tabledataChanged();
 
+    void headerTableDataChanged();
+
 
 private:
     QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> m_StructList;
     QList<QSharedPointer<QCatGrayQuickTableViewHeaderStruct>> m_headerStruct;
-    uint m_HeaderCount = 0;
+    QStringList m_headerTableData;
     int m_PreferredHeaderHeight = 30;
     int m_MinimumHeaderHeight = 30;
     int m_MaximumHeaderHeight = 30;
