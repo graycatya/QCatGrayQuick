@@ -1,7 +1,7 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import com.catgray.QCatGrayQuickTableViewModel 1.0
+import QtQuick 
+import QtQuick.Controls 
+import QtQuick.Layouts 
+import com.catgray.QCatGrayQuickTableViewModel 
 
 Rectangle {
     id: root
@@ -86,7 +86,5 @@ Rectangle {
 
         delegate: root.delegate
     }
-
-
 
 }

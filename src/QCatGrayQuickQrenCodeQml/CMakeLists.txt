@@ -21,8 +21,8 @@ message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Gui Quick)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Gui Quick)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Gui Quick)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui Quick)
 
 if(TARGET qrencode)
   message("libqrencode found")
@@ -47,7 +47,7 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Gui
-        Qt${QT_VERSION_MAJOR}::Widgets
+        #Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Quick
         qrencode)
 
@@ -55,7 +55,7 @@ target_link_libraries(${PROJECT_NAME}_a
     PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Gui
-        Qt${QT_VERSION_MAJOR}::Widgets
+        #Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Quick
         qrencode)
 

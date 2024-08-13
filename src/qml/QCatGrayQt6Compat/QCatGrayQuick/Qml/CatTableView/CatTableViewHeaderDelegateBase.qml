@@ -1,8 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
-import com.catgray.QCatGrayQuickTableViewModel 1.0
-import com.catgray.QCatGrayQuickTableViewModelStruct 1.0
-import com.catgray.QCatGrayQuickTableViewHeaderStruct 1.0
+import QtQuick 
+import QtQuick.Layouts 
+import com.catgray.QCatGrayQuickTableViewModel 
+import com.catgray.QCatGrayQuickTableViewModelStruct 
+import com.catgray.QCatGrayQuickTableViewHeaderStruct 
 
 Item {
     id: root
@@ -37,7 +37,7 @@ Item {
             hoverEnabled: true
             propagateComposedEvents: true
 
-            onPositionChanged: {
+            onPositionChanged: (mouse)=> {
                 if(pressed)
                 {
                     datamodel.interactive = false
@@ -55,7 +55,7 @@ Item {
                     mouse.accepted = true
                 }
             }
-            onPressed:  {
+            onPressed: (mouse)=> {
                 datamodel.interactive = false
                 datamodel.setOverrideCursor(Qt.SizeHorCursor);
                 rightrect.lastmouseX = mouseX;
@@ -87,7 +87,6 @@ Item {
                 datamodel.updateHeaderStruct()
             }
         }
-
     }
 
 }

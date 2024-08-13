@@ -47,6 +47,5 @@
         <file>Qml/CatTableView/CatTableViewDelegateBase.qml</file>
         <file>Qml/CatTableView/CatTableViewHeaderDelegateBase.qml</file>
         <file>Qml/CatTableView/CatTableViewItemBase.qml</file>
-        <file>Qml/QCatGrayQuickMethod.js</file>
     </qresource>
 </RCC>

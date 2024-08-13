@@ -1,7 +1,7 @@
-import QtQuick 2.12
-import com.catgray.QCatGrayQuickTableViewModel 1.0
-import com.catgray.QCatGrayQuickTableViewModelStruct 1.0
-import com.catgray.QCatGrayQuickTableViewHeaderStruct 1.0
+import QtQuick 
+import com.catgray.QCatGrayQuickTableViewModel 
+import com.catgray.QCatGrayQuickTableViewModelStruct 
+import com.catgray.QCatGrayQuickTableViewHeaderStruct 
 
 Rectangle {
     id: root

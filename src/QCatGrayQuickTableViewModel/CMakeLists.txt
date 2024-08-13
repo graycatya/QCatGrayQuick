@@ -18,8 +18,8 @@ message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Widgets)
 
 
 file(GLOB SRC_LIST
@@ -27,8 +27,7 @@ file(GLOB SRC_LIST
   "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
 )
 
-add_library(${PROJECT_NAME} SHARED ${SRC_LIST}
-    QCatGrayQuickTableViewHeaderStruct.h QCatGrayQuickTableViewHeaderStruct.cpp)
+add_library(${PROJECT_NAME} SHARED ${SRC_LIST})
 
 add_library(${PROJECT_NAME}_a STATIC ${SRC_LIST})
 
@@ -37,12 +36,14 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
+        Qt${QT_VERSION_MAJOR}::Widgets
         )
 
 target_link_libraries(${PROJECT_NAME}_a
     PRIVATE
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
+        Qt${QT_VERSION_MAJOR}::Widgets
         )
 
 target_include_directories(${PROJECT_NAME}

@@ -14,6 +14,7 @@ class QCatGrayQuickTableViewModel : public QAbstractListModel
     Q_PROPERTY(int minimumHeaderHeight READ minimumHeaderHeight WRITE setMinimumHeaderHeight NOTIFY minimumHeaderHeightChanged)
     Q_PROPERTY(int maximumHeaderHeight READ maximumHeaderHeight WRITE setMaximumHeaderHeight NOTIFY maximumHeaderHeightChanged)
     Q_PROPERTY(int flickableWidth READ flickableWidth WRITE setFlickableWidth NOTIFY flickableWidthChanged)
+    Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged)
 public:
     explicit QCatGrayQuickTableViewModel(QObject *parent = nullptr);
     ~QCatGrayQuickTableViewModel();
@@ -61,6 +62,8 @@ public:
     Q_INVOKABLE QStringList headerTableData() const { return m_headerTableData; }
     Q_INVOKABLE void setHeaderTableData(QStringList data);
 
+    Q_INVOKABLE bool interactive() const { return m_Interactive; }
+    Q_INVOKABLE void setInteractive(bool interactive);
 
 private:
     void InitConnect();
@@ -85,6 +88,7 @@ signals:
 
     void headerTableDataChanged();
 
+    void interactiveChanged();
 
 private:
     QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> m_StructList;
@@ -94,4 +98,5 @@ private:
     int m_MinimumHeaderHeight = 30;
     int m_MaximumHeaderHeight = 30;
     int m_FlickableWidth = 0;
+    bool m_Interactive = true;
 };

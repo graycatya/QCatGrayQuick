@@ -77,18 +77,24 @@ int QCatGrayQuickTableViewModel::getStructSize()
 
 void QCatGrayQuickTableViewModel::removeStruct(int index)
 {
-    beginRemoveRows(QModelIndex(),m_StructList.count(),m_StructList.count());
-    m_StructList.removeAt(index);
-    endRemoveRows();
-    emit tabledataChanged();
+    if(index >= 0 && index < m_StructList.count())
+    {
+        beginRemoveRows(QModelIndex(),index,index);
+        m_StructList.removeAt(index);
+        endRemoveRows();
+        emit tabledataChanged();
+    }
 }
 
 void QCatGrayQuickTableViewModel::clearModel()
 {
-    beginResetModel();
-    m_StructList.clear();
-    endResetModel();
-    emit tabledataChanged();
+    if(!m_StructList.isEmpty())
+    {
+        beginResetModel();
+        m_StructList.clear();
+        endResetModel();
+        emit tabledataChanged();
+    }
 }
 
 QCatGrayQuickTableViewHeaderStruct *QCatGrayQuickTableViewModel::getHeaderStruct(int index)
@@ -255,6 +261,15 @@ void QCatGrayQuickTableViewModel::setHeaderTableData(QStringList data)
             m_headerStruct.insert(m_headerStruct.count(), QSharedPointer<QCatGrayQuickTableViewHeaderStruct>(t_struct));
         }
         emit headerTableDataChanged();
+    }
+}
+
+void QCatGrayQuickTableViewModel::setInteractive(bool interactive)
+{
+    if(m_Interactive != interactive)
+    {
+        m_Interactive = interactive;
+        emit interactiveChanged();
     }
 }
 
