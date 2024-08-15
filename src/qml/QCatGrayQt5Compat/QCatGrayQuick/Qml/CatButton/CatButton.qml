@@ -18,6 +18,7 @@ Button{
     property alias tipBackground: tooltiprectangle
     property alias mouseArea: mousearea
     property bool selected: false
+    property bool ispressed: false
     signal buttonEntered()
     signal buttonExited()
 
@@ -78,12 +79,19 @@ Button{
         cursorShape: enabled ? Qt.PointingHandCursor : Qt.ForbiddenCursor
         onDoubleClicked: { mouse.accepted = false;}
         onPositionChanged: { mouse.accepted = false;}
-        onPressed:  {  mouse.accepted = false; }
+        onPressed:  {
+            root.ispressed = true
+            //mouse.accepted = false;
+        }
         onPressAndHold: { mouse.accepted = false; }
         onClicked:  { mouse.accepted = false;}
-        onReleased: { mouse.accepted = false;}
+        onReleased: {
+            root.ispressed = false
+            //mouse.accepted = false;
+        }
         onWheel: { wheel.accepted = false; }
         onEntered: { buttonEntered() }
         onExited: { buttonExited() }
     }
+
 }
