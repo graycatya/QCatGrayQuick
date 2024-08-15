@@ -84,7 +84,10 @@ Button{
             //mouse.accepted = false;
         }
         onPressAndHold: { mouse.accepted = false; }
-        onClicked:  { mouse.accepted = false;}
+        onClicked:  {
+            parent.clicked()
+            mouse.accepted = false;
+        }
         onReleased: {
             root.ispressed = false
             //mouse.accepted = false;
