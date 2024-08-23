@@ -21,6 +21,7 @@ Button {
     property string btnImgHovered
     property string btnImgPressed
     property string btnImgDisbaled
+    property var parentMouse: null
 
     property string btnImgUrl:  {
         if (!catbuttonimage.enabled) {
@@ -112,6 +113,18 @@ Button {
         onClicked:  { mouse.accepted = false;}
         onReleased: { mouse.accepted = false;}
         onWheel: { wheel.accepted = false; }
+        onEntered: {
+            if(parentMouse)
+            {
+                parentMouse.entered()
+            }
+        }
+        onExited: {
+            if(parentMouse)
+            {
+                parentMouse.exited()
+            }
+        }
     }
 
 }
