@@ -8,14 +8,11 @@ Rectangle {
     width: 46; height: 46
     //anchors.centerIn: parent
     antialiasing: true
-    property variant styles: [ ShapePath.FlatCap, ShapePath.SquareCap, ShapePath.RoundCap ]
+    //property variant styles: [ ShapePath.FlatCap, ShapePath.SquareCap, ShapePath.RoundCap ]
     //圆形进度背景
     property alias backdropstrokeColor: backdrop.strokeColor   
     //property alias backdropstrokeWidth: backdrop.strokeWidth
-    //进度条背景
-    //圆心位置
-    property alias backdroparcX: backdroparc.centerX
-    property alias backdroparcY: backdroparc.centerY
+
     //进度条背景起始角度
     property alias backdroparcstartAngle: backdroparc.startAngle
     //进度条背景当前角度
@@ -24,8 +21,7 @@ Rectangle {
 
     //进度条
     property alias progressbarstrokeColor: progressbar.strokeColor   
-    property alias progressbararccenterX: progressbararc.centerX
-    property alias progressbararccenterY: progressbararc.centerY
+
     //进度条起始角度
     property alias progressbararcstartAngle: progressbararc.startAngle
     //进度条当前角度
@@ -40,11 +36,12 @@ Rectangle {
     property int radiusX: 46
     property int radiusY: 46
 
-    property int capStyle: 0
+    property int capStyle: ShapePath.FlatCap
     property int strokeWidth: 10
     
 
     Shape {
+        //anchors.centerIn: parent
         width: root.width; height: root.height
         antialiasing: true
 
@@ -53,11 +50,11 @@ Rectangle {
             fillColor: "transparent"
             strokeColor: "darkBlue"
             strokeWidth: root.strokeWidth
-            capStyle: styles[root.capStyle]
+            capStyle: root.capStyle
 
             PathAngleArc {
                 id: backdroparc
-                centerX: 46; centerY: 46
+                centerX: root.width/2; centerY: root.height/2
                 radiusX: root.radiusX; radiusY: root.radiusY
                 startAngle: -180
                 sweepAngle: 90
@@ -67,6 +64,7 @@ Rectangle {
     }
 
     Shape {
+        //anchors.centerIn: parent
         width: root.width; height: root.height
         antialiasing: true
         
@@ -75,11 +73,11 @@ Rectangle {
             fillColor: "transparent"
             strokeColor: "gray"
             strokeWidth: root.strokeWidth
-            capStyle: styles[root.capStyle]
+            capStyle: root.capStyle
 
             PathAngleArc {
                 id: progressbararc
-                centerX: 46; centerY: 46
+                centerX: root.width/2; centerY: root.height/2
                 radiusX: root.radiusX; radiusY: root.radiusY
                 startAngle: -180
                 //sweepAngle: 15
