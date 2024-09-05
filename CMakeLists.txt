@@ -20,6 +20,8 @@ message(STATUS " .. size(void*) ................. = ${CMAKE_SIZEOF_VOID_P}"   )
 message(STATUS " .. cmake current source ................. = ${CMAKE_CURRENT_SOURCE_DIR}")
 message(STATUS " .. cmake system name ................. = ${CMAKE_SYSTEM_NAME}")
 
+# build option
+option(QCATGRAYQUICKPROJECTS_EXAMPLES "Build examples" OFF)
 
 set(3RDPARTY
     libqrencode
@@ -58,9 +60,11 @@ foreach(module ${MODULES})
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/${module})
 endforeach(module ${MODULES})
 
+if(QCATGRAYQUICKPROJECTS_EXAMPLES)
 foreach(example ${EXAMPLES})
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/${example})
 endforeach(example ${EXAMPLES})
+endif()
 
 message(STATUS " .. qt version ................. = ${CAT_QT_CURRENT_VERSION}")
 message(STATUS " .. qml import path ................. = ${QML_IMPORT_PATH}")
