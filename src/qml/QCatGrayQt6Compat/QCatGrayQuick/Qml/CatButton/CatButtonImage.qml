@@ -21,6 +21,7 @@ Button {
     property string btnImgHovered
     property string btnImgPressed
     property string btnImgDisbaled
+    property var parentMouse: null
 
     property string btnImgUrl:  {
         if (!catbuttonimage.enabled) {
@@ -96,7 +97,7 @@ Button {
     MouseArea {
         id: buttonmouse
         anchors.fill: parent
-        //hoverEnabled: true
+        hoverEnabled: true
         propagateComposedEvents: true
         //鼠标图标， hovered 或者 pressed时显示此图标
         cursorShape: enabled ? Qt.PointingHandCursor : Qt.ForbiddenCursor
@@ -104,7 +105,10 @@ Button {
             mouse.accepted = false;
         }
         onPositionChanged: function(mouse){
-            mouse.accepted = false;
+            if(mouse)
+            {
+                mouse.accepted = false;
+            }
         }
         onPressed:  function(mouse){
             mouse.accepted = false;
@@ -118,8 +122,20 @@ Button {
         onReleased: function(mouse){
             mouse.accepted = false;
         }
-        onWheel: function(mouse){
+        onWheel: function(wheel){
             wheel.accepted = false;
+        }
+        onEntered: {
+            if(parentMouse)
+            {
+                parentMouse.entered()
+            }
+        }
+        onExited: {
+            if(parentMouse)
+            {
+                parentMouse.exited()
+            }
         }
     }
 

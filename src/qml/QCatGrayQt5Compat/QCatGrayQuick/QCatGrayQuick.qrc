@@ -47,5 +47,6 @@
         <file>Qml/CatTableView/CatTableViewDelegateBase.qml</file>
         <file>Qml/CatTableView/CatTableViewHeaderDelegateBase.qml</file>
         <file>Qml/CatTableView/CatTableViewItemBase.qml</file>
+        <file>Qml/CatBasics/CatMessage.qml</file>
     </qresource>
 </RCC>
