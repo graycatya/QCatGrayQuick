@@ -5,7 +5,7 @@ import "../CatButton"
 
 Item {
     id: root
-    clip: true
+    clip: false
 
     FontMetrics {
         id: fontmetrics
@@ -19,14 +19,14 @@ Item {
     }
 
     enum LayoutDirection {
-        TopLeft = 0,
-        TopRight,
-        TopCenter,
-        LeftCenter,
-        RightCenter,
-        BottomCenter,
-        BottomLeft,
-        BottomRight
+        TopLeftDirection = 0,
+        TopRightDirection = 1,
+        TopCenterDirection = 2,
+        LeftCenterDirection = 3,
+        RightCenterDirection = 4,
+        BottomCenterDirection = 5,
+        BottomLeftDirection = 6,
+        BottomRightDirection = 7
     }
 
 
@@ -69,12 +69,12 @@ Item {
     property int rightMargin: 10
     property int leftMargin: 10
 
-    property int messagelayout_topMargin: 10
-    property int messagelayout_bottomMargin: 10
-    property int messagelayout_rightMargin: 10
-    property int messagelayout_leftMargin: 10
+    property int messagelayout_topMargin: 20
+    property int messagelayout_bottomMargin: 20
+    property int messagelayout_rightMargin: 20
+    property int messagelayout_leftMargin: 20
 
-    property int layoutDirection: CatMessage.TopCenter
+    property int layoutDirection: CatMessage.TopLeft
 
     width: parentWidth
     height: parentHeight
@@ -82,283 +82,410 @@ Item {
 
     ListModel {
         id: messageModel
+
+        onCountChanged: {
+            if(messageModel.count > 0)
+            {
+                if(removetimer.running)
+                {
+                    removetimer.stop()
+                }
+                removetimer.restart()
+            }
+        }
     }
 
-    Repeater {
-        id: repeater
-        model: messageModel
+    ListView {
+        id: listview
+        interactive: false
+
         anchors.fill: parent
-        clip: true
+        anchors.topMargin: root.messagelayout_topMargin
+        anchors.bottomMargin: root.messagelayout_bottomMargin
+        anchors.leftMargin: root.messagelayout_leftMargin
+        anchors.rightMargin: root.messagelayout_rightMargin
+        model: messageModel
+        spacing: 10
 
-        delegate: Rectangle {
+        displaced: Transition {
+            NumberAnimation { properties: "x"; duration: 300 }
+            NumberAnimation { properties: "y"; duration: 300 }
+        }
 
-            id: baseMessageItem
-
-            readonly property int currentindex: index
-            property bool isinit: false
-
-            //anchors.horizontalCenter: parent.horizontalCenter
+        delegate: Item {
+            id: baseMessageItemParent
             width: root.message_width
-            height: rowlayout.implicitHeight + rowlayout.anchors.topMargin + rowlayout.anchors.bottomMargin
-            color: "#00000000"
+            height: baseMessageItem.height
+            Rectangle {
 
-            RowLayout {
-                id: rowlayout
-                spacing: root.spacing
-                anchors.fill: parent
-                anchors.topMargin: root.messagelayout_topMargin
-                anchors.bottomMargin: root.messagelayout_bottomMargin
-                anchors.leftMargin: root.messagelayout_leftMargin
-                anchors.rightMargin: root.messagelayout_rightMargin
+                id: baseMessageItem
 
-                Image {
-                    id: messageimage
-                    Layout.minimumWidth: 16
-                    Layout.minimumHeight: 16
-                }
-                Text {
-                    id: messagetest
-                    text: message
-                    font: root.message_font
-                    wrapMode: Text.WordWrap
-                    Layout.minimumWidth: 50
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    textFormat: parseInt(messagetextFormat)
+                readonly property int currentindex: index
 
-                }
-                CatButtonImage {
-                    id: messagecloseButton
-                    Layout.minimumWidth: 16
-                    Layout.minimumHeight: 16
-                }
-            }
+                width: root.message_width
+                height: rowlayout.implicitHeight + rowlayout.anchors.topMargin + rowlayout.anchors.bottomMargin
+                color: "#00000000"
 
-            onCurrentindexChanged: {
-                console.log("onCurrentindexChanged: " + currentindex)
-                if(baseMessageItem.isinit)
-                {
-                    updateCoordinate()
-                }
-            }
+                RowLayout {
+                    id: rowlayout
+                    spacing: root.spacing
+                    anchors.fill: parent
+                    anchors.topMargin: root.messagelayout_topMargin
+                    anchors.bottomMargin: root.messagelayout_bottomMargin
+                    anchors.leftMargin: root.messagelayout_leftMargin
+                    anchors.rightMargin: root.messagelayout_rightMargin
 
-            Component.onDestruction: {
-                console.log("dest: " + currentindex)
-            }
+                    Image {
+                        id: messageimage
+                        Layout.minimumWidth: 16
+                        Layout.minimumHeight: 16
+                    }
+                    Text {
+                        id: messagetest
+                        text: message
+                        font: root.message_font
+                        wrapMode: Text.WordWrap
+                        Layout.minimumWidth: 50
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        textFormat: parseInt(messagetextFormat)
 
-            Component.onCompleted: {
-                console.log("comp: " + currentindex)
-                initProperty()
-                addupdateCoordinate()
-                baseMessageItem.isinit = true
-
-            }
-
-            ParallelAnimation {
-                id: addparallelanimation
-
-                NumberAnimation {
-                    id: add_xAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-                NumberAnimation {
-                    id: add_yAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-                NumberAnimation {
-                    id: add_opacityAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-
-                onFinished: {
-                    removetimer.restart()
-                }
-            }
-
-            ParallelAnimation {
-                id: removeparallelanimation
-
-                NumberAnimation {
-                    id: remove_xAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-                NumberAnimation {
-                    id: remove_yAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-                NumberAnimation {
-                    id: remove_opacityAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-
-                onFinished: {
-                    console.log("removeparallelanimation: " + currentindex)
-                    console.log("messageModel: " + messageModel.count)
-                    if(messageModel.count > 0)
-                    {
-                        messageModel.remove(0)
+                    }
+                    CatButtonImage {
+                        id: messagecloseButton
+                        Layout.minimumWidth: 16
+                        Layout.minimumHeight: 16
                     }
                 }
-            }
 
-            ParallelAnimation {
-                id: updateparallelanimation
-
-                NumberAnimation {
-                    id: update_xAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-                NumberAnimation {
-                    id: update_yAnimation
-                    target: baseMessageItem
-                    duration: 300
-                }
-                NumberAnimation {
-                    id: update_opacityAnimation
-                    target: baseMessageItem
-                    duration: 300
+                Component.onDestruction: {
+                    console.log("dest: " + currentindex)
                 }
 
-                onFinished: {
-                    if(messageModel.count > 0 &&
-                            baseMessageItem.currentindex === 0)
-                    {
+                Component.onCompleted: {
+                    initProperty()
+                    addupdateCoordinate()
+
+                }
+
+                ParallelAnimation {
+                    id: addparallelanimation
+
+                    NumberAnimation {
+                        id: add_xAnimation
+                        target: baseMessageItem
+                        duration: 300
+                    }
+                    NumberAnimation {
+                        id: add_yAnimation
+                        target: baseMessageItem
+                        duration: 300
+                    }
+                    NumberAnimation {
+                        id: add_opacityAnimation
+                        target: baseMessageItem
+                        duration: 300
+                    }
+
+                    onFinished: {
+                        console.log("messageModel.count: " + messageModel.count)
+                        if(removetimer.running)
+                        {
+                            removetimer.stop()
+                        }
                         removetimer.restart()
                     }
                 }
-            }
 
-            function initProperty() {
-                switch(messageType) {
-                    case CatMessage.Succeed: {
-                        baseMessageItem.color = succeed_back_color
-                        baseMessageItem.border.color = succeed_border_color
-                        baseMessageItem.border.width = succeed_border_width
-                        baseMessageItem.radius = succeed_back_radius
-                        messagetest.color = message_text_succeed_color
-                        break;
+                ParallelAnimation {
+                    id: removeparallelanimation
+
+                    NumberAnimation {
+                        id: remove_xAnimation
+                        target: baseMessageItem
+                        duration: 300
                     }
-                    case CatMessage.Warning: {
-                        baseMessageItem.color = warning_back_color
-                        baseMessageItem.border.color = warning_border_color
-                        baseMessageItem.border.width = warning_border_width
-                        baseMessageItem.radius = warning_back_radius
-                        messagetest.color = message_text_warning_color
-                        break;
+                    NumberAnimation {
+                        id: remove_yAnimation
+                        target: baseMessageItem
+                        duration: 300
                     }
-                    case CatMessage.Information: {
-                        baseMessageItem.color = information_back_color
-                        baseMessageItem.border.color = information_border_color
-                        baseMessageItem.border.width = information_border_width
-                        baseMessageItem.radius = information_back_radius
-                        messagetest.color = message_text_information_color
-                        break;
+                    NumberAnimation {
+                        id: remove_opacityAnimation
+                        target: baseMessageItem
+                        duration: 300
                     }
-                    case CatMessage.Errored: {
-                        baseMessageItem.color = errored_back_color
-                        baseMessageItem.border.color = errored_border_color
-                        baseMessageItem.border.width = errored_border_width
-                        baseMessageItem.radius = errored_back_radius
-                        messagetest.color = message_text_errored_color
-                        break;
+
+                    onFinished: {
+                        console.log("messageModel.count: " + messageModel.count)
+                        if(messageModel.count > 0)
+                        {
+                            listview.model.remove(0)
+                            if(removetimer.running)
+                            {
+                                removetimer.stop()
+                            }
+                            removetimer.restart()
+                        }
                     }
                 }
-            }
 
-            function addupdateCoordinate() {
-                switch(root.layoutDirection) {
-                    case CatMessage.TopCenter: {
-                        add_xAnimation.properties = ""
-                        add_yAnimation.properties = "y"
-                        baseMessageItem.anchors.horizontalCenter = parent.horizontalCenter
-                        add_yAnimation.from = currentindex <= 0 ? 0 - baseMessageItem.height
-                                                             : repeater.itemAt(currentindex - 1).y + repeater.itemAt(currentindex - 1).height - baseMessageItem.height
-                        add_yAnimation.to = currentindex <= 0 ? topMargin
-                                                           : topMargin + repeater.itemAt(currentindex - 1).y + baseMessageItem.height
-                        add_opacityAnimation.properties = "opacity"
-                        add_opacityAnimation.from = 0
-                        add_opacityAnimation.to = 1
-                        addparallelanimation.restart()
-
-                        break;
-                    }
-                    case CatMessage.BottomCenter: {
-                        baseMessageItem.anchors.horizontalCenter = parent.horizontalCenter
-                        break;
-                    }
-                }
-            }
-
-            function removeupdateCoordinate() {
-                switch(root.layoutDirection) {
-                    case CatMessage.TopCenter: {
-                        remove_xAnimation.properties = ""
-                        remove_yAnimation.properties = "y"
-                        baseMessageItem.anchors.horizontalCenter = parent.horizontalCenter
-                        remove_yAnimation.from = currentindex <= 0 ? topMargin
-                                                             : topMargin + repeater.itemAt(currentindex - 1).y + baseMessageItem.height
-                        remove_yAnimation.to = currentindex <= 0 ? 0 - baseMessageItem.height
-                                                           : repeater.itemAt(currentindex - 1).y + repeater.itemAt(currentindex - 1).height - baseMessageItem.height
-                        remove_opacityAnimation.properties = "opacity"
-                        remove_opacityAnimation.from = 1
-                        remove_opacityAnimation.to = 0
-                        removeparallelanimation.restart()
-
-                        break;
-                    }
-                    case CatMessage.BottomCenter: {
-                        baseMessageItem.anchors.horizontalCenter = parent.horizontalCenter
-                        break;
+                function initProperty() {
+                    switch(messageType) {
+                        case CatMessage.Succeed: {
+                            baseMessageItem.color = succeed_back_color
+                            baseMessageItem.border.color = succeed_border_color
+                            baseMessageItem.border.width = succeed_border_width
+                            baseMessageItem.radius = succeed_back_radius
+                            messagetest.color = message_text_succeed_color
+                            break;
+                        }
+                        case CatMessage.Warning: {
+                            baseMessageItem.color = warning_back_color
+                            baseMessageItem.border.color = warning_border_color
+                            baseMessageItem.border.width = warning_border_width
+                            baseMessageItem.radius = warning_back_radius
+                            messagetest.color = message_text_warning_color
+                            break;
+                        }
+                        case CatMessage.Information: {
+                            baseMessageItem.color = information_back_color
+                            baseMessageItem.border.color = information_border_color
+                            baseMessageItem.border.width = information_border_width
+                            baseMessageItem.radius = information_back_radius
+                            messagetest.color = message_text_information_color
+                            break;
+                        }
+                        case CatMessage.Errored: {
+                            baseMessageItem.color = errored_back_color
+                            baseMessageItem.border.color = errored_border_color
+                            baseMessageItem.border.width = errored_border_width
+                            baseMessageItem.radius = errored_back_radius
+                            messagetest.color = message_text_errored_color
+                            break;
+                        }
                     }
                 }
-            }
 
-            function updateCoordinate() {
-                switch(root.layoutDirection) {
-                    case CatMessage.TopCenter: {
-                        update_xAnimation.properties = ""
-                        update_yAnimation.properties = "y"
-                        baseMessageItem.anchors.horizontalCenter = parent.horizontalCenter
-                        update_yAnimation.from = currentindex <= 0 ? baseMessageItem.y
-                                                             : topMargin + repeater.itemAt(currentindex - 1).y + baseMessageItem.height
-                        update_yAnimation.to = currentindex <= 0 ? topMargin
-                                                           : repeater.itemAt(currentindex - 1).y + repeater.itemAt(currentindex - 1).height - baseMessageItem.height
-                        update_opacityAnimation.properties = ""
-                        updateparallelanimation.restart()
+                function addupdateCoordinate() {
+                    switch(root.layoutDirection) {
+                        case CatMessage.TopCenterDirection: {
 
-                        break;
-                    }
-                    case CatMessage.BottomCenter: {
-                        baseMessageItem.anchors.horizontalCenter = parent.horizontalCenter
-                        break;
+                            baseMessageItemParent.anchors.horizontalCenter = baseMessageItemParent.parent.horizontalCenter
+
+                            add_xAnimation.properties = ""
+                            add_yAnimation.properties = "y"
+                            add_yAnimation.from = - baseMessageItem.height
+                            add_yAnimation.to =  0
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+
+                            break;
+                        }
+                        case CatMessage.BottomCenterDirection: {
+                            baseMessageItemParent.anchors.horizontalCenter = baseMessageItemParent.parent.horizontalCenter
+
+                            add_xAnimation.properties = ""
+                            add_yAnimation.properties = "y"
+                            add_yAnimation.from = baseMessageItem.height
+                            add_yAnimation.to =  0
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.TopLeftDirection: {
+                            baseMessageItemParent.anchors.left = baseMessageItemParent.parent.left
+
+                            add_xAnimation.properties = ""
+                            add_yAnimation.properties = "y"
+                            add_yAnimation.from = - baseMessageItem.height
+                            add_yAnimation.to =  0
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.TopRightDirection: {
+                            baseMessageItemParent.anchors.right = baseMessageItemParent.parent.right
+
+                            add_xAnimation.properties = ""
+                            add_yAnimation.properties = "y"
+                            add_yAnimation.from = - baseMessageItem.height
+                            add_yAnimation.to =  0
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.BottomLeftDirection: {
+                            baseMessageItemParent.anchors.left = baseMessageItemParent.parent.left
+
+                            add_xAnimation.properties = ""
+                            add_yAnimation.properties = "y"
+                            add_yAnimation.from = baseMessageItem.height
+                            add_yAnimation.to =  0
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.BottomRightDirection: {
+                            baseMessageItemParent.anchors.right = baseMessageItemParent.parent.right
+
+                            add_xAnimation.properties = ""
+                            add_yAnimation.properties = "y"
+                            add_yAnimation.from = baseMessageItem.height
+                            add_yAnimation.to =  0
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.RightCenterDirection: {
+                            baseMessageItemParent.anchors.verticalCenter = baseMessageItemParent.parent.verticalCenter
+
+                            add_xAnimation.properties = "x"
+                            add_xAnimation.from = baseMessageItem.width
+                            add_xAnimation.to =  0
+                            add_yAnimation.properties = ""
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.LeftCenterDirection: {
+                            baseMessageItemParent.anchors.verticalCenter = baseMessageItemParent.parent.verticalCenter
+
+                            add_xAnimation.properties = "x"
+                            add_xAnimation.from = - baseMessageItem.width
+                            add_xAnimation.to =  0
+                            add_yAnimation.properties = ""
+                            add_opacityAnimation.properties = "opacity"
+                            add_opacityAnimation.from = 0
+                            add_opacityAnimation.to = 1
+                            addparallelanimation.restart()
+                            break;
+                        }
                     }
                 }
-            }
 
-            Connections {
-                target: removetimer
-                function onRemoveTrigered(removeindex) {
-                    console.log("removeindex: " + removeindex)
-                    if(removeindex === baseMessageItem.currentindex)
-                    {
-                        removeupdateCoordinate()
+                function removeupdateCoordinate() {
+                    switch(root.layoutDirection) {
+                        case CatMessage.TopCenterDirection:
+                        case CatMessage.TopLeftDirection:
+                        case CatMessage.TopRightDirection:
+                        {
+                            remove_xAnimation.properties = ""
+                            remove_yAnimation.properties = "y"
+                            remove_yAnimation.from = 0
+                            remove_yAnimation.to =  - baseMessageItem.height
+                            remove_opacityAnimation.properties = "opacity"
+                            remove_opacityAnimation.from = 1
+                            remove_opacityAnimation.to = 0
+                            removeparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.BottomCenterDirection:
+                        case CatMessage.BottomLeftDirection:
+                        case CatMessage.BottomRightDirection:
+                        {
+                            remove_xAnimation.properties = ""
+                            remove_yAnimation.properties = "y"
+                            remove_yAnimation.from = 0
+                            remove_yAnimation.to =  baseMessageItem.height
+
+                            remove_opacityAnimation.properties = "opacity"
+                            remove_opacityAnimation.from = 1
+                            remove_opacityAnimation.to = 0
+                            removeparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.RightCenterDirection:
+                        {
+                            remove_xAnimation.properties = "x"
+                            remove_xAnimation.from = 0
+                            remove_xAnimation.to =  baseMessageItem.width
+                            remove_yAnimation.properties = ""
+                            remove_opacityAnimation.properties = "opacity"
+                            remove_opacityAnimation.from = 1
+                            remove_opacityAnimation.to = 0
+                            removeparallelanimation.restart()
+                            break;
+                        }
+                        case CatMessage.LeftCenterDirection:
+                        {
+                            remove_xAnimation.properties = "x"
+                            remove_xAnimation.from = 0
+                            remove_xAnimation.to =  - baseMessageItem.width
+                            remove_yAnimation.properties = ""
+                            remove_opacityAnimation.properties = "opacity"
+                            remove_opacityAnimation.from = 1
+                            remove_opacityAnimation.to = 0
+                            removeparallelanimation.restart()
+                            break;
+                        }
+                    }
+                }
+
+                Connections {
+                    target: removetimer
+                    function onRemoveTrigered(removeindex) {
+                        console.log("baseMessageItem.currentindex: " + baseMessageItem.currentindex)
+                        if(removeindex === baseMessageItem.currentindex)
+                        {
+                            baseMessageItem.removeupdateCoordinate()
+                        }
                     }
                 }
             }
         }
     }
 
+    onLayoutDirectionChanged: {
+        switch(root.layoutDirection) {
+            case CatMessage.TopCenterDirection:
+            case CatMessage.TopLeftDirection:
+            case CatMessage.TopRightDirection:
+            {
+                listview.orientation = ListView.Vertical
+                listview.verticalLayoutDirection = ListView.TopToBottom
+                break;
+            }
+            case CatMessage.BottomCenterDirection:
+            case CatMessage.BottomLeftDirection:
+            case CatMessage.BottomRightDirection:
+            {
+                listview.orientation = ListView.Vertical
+                listview.verticalLayoutDirection = ListView.BottomToTop
+                break;
+            }
+            case CatMessage.RightCenterDirection:
+            {
+                listview.orientation = ListView.Horizontal
+                listview.layoutDirection = ListView.RightToLeft
+                break;
+            }
+            case CatMessage.LeftCenterDirection:
+            {
+                listview.orientation = ListView.Horizontal
+                listview.layoutDirection = ListView.LeftToRight
+                break;
+            }
+        }
+    }
+
     Timer {
         id: removetimer
-        interval: 3000
-//        running: true
+        interval: 2000
         signal removeTrigered(var removeindex)
         onTriggered: {
             removetimer.removeTrigered(0)
