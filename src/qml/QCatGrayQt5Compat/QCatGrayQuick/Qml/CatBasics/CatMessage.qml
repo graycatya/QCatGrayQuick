@@ -100,10 +100,10 @@ Item {
         interactive: false
 
         anchors.fill: parent
-        anchors.topMargin: root.messagelayout_topMargin
-        anchors.bottomMargin: root.messagelayout_bottomMargin
-        anchors.leftMargin: root.messagelayout_leftMargin
-        anchors.rightMargin: root.messagelayout_rightMargin
+        anchors.topMargin: root.topMargin
+        anchors.bottomMargin: root.bottomMargin
+        anchors.leftMargin: root.leftMargin
+        anchors.rightMargin: root.rightMargin
         model: messageModel
         spacing: 10
 
