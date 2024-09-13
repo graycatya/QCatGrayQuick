@@ -33,6 +33,13 @@ Item {
     readonly property int parentWidth: parent.width
     readonly property int parentHeight: parent.height
 
+    property url succeed_image: ""
+    property url warning_image: ""
+    property url information_image: ""
+    property url errored_image: ""
+
+    property int message_image_size: 16
+
     property color succeed_back_color: "#00000000"
     property color warning_back_color: "#00000000"
     property color information_back_color: "#00000000"
@@ -139,6 +146,8 @@ Item {
                         id: messageimage
                         Layout.minimumWidth: 16
                         Layout.minimumHeight: 16
+                        Layout.preferredWidth: root.message_image_size
+                        Layout.preferredHeight: root.message_image_size
                     }
                     Text {
                         id: messagetest
@@ -238,6 +247,7 @@ Item {
                             baseMessageItem.border.width = succeed_border_width
                             baseMessageItem.radius = succeed_back_radius
                             messagetest.color = message_text_succeed_color
+                            messageimage.source = root.succeed_image
                             break;
                         }
                         case CatMessage.Warning: {
@@ -246,6 +256,7 @@ Item {
                             baseMessageItem.border.width = warning_border_width
                             baseMessageItem.radius = warning_back_radius
                             messagetest.color = message_text_warning_color
+                            messageimage.source = root.warning_image
                             break;
                         }
                         case CatMessage.Information: {
@@ -254,6 +265,7 @@ Item {
                             baseMessageItem.border.width = information_border_width
                             baseMessageItem.radius = information_back_radius
                             messagetest.color = message_text_information_color
+                            messageimage.source = root.information_image
                             break;
                         }
                         case CatMessage.Errored: {
@@ -262,6 +274,7 @@ Item {
                             baseMessageItem.border.width = errored_border_width
                             baseMessageItem.radius = errored_back_radius
                             messagetest.color = message_text_errored_color
+                            messageimage.source = root.errored_image
                             break;
                         }
                     }
