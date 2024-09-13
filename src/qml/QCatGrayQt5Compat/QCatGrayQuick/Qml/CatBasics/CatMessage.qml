@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import "../CatButton"
@@ -83,6 +83,13 @@ Item {
 
     property int layoutDirection: CatMessage.TopLeft
 
+    property bool showCloseButton: false
+    property url close_button_image_Normal: ""
+    property url close_button_image_Hovered: ""
+    property url close_button_image_Pressed: ""
+    property url close_button_image_Disbaled: ""
+    property int close_button_image_size: 16
+
     width: parentWidth
     height: parentHeight
     z: parent.children.length
@@ -128,6 +135,7 @@ Item {
                 id: baseMessageItem
 
                 readonly property int currentindex: index
+                property int removeindex: -1
 
                 width: root.message_width
                 height: rowlayout.implicitHeight + rowlayout.anchors.topMargin + rowlayout.anchors.bottomMargin
@@ -164,11 +172,26 @@ Item {
                         id: messagecloseButton
                         Layout.minimumWidth: 16
                         Layout.minimumHeight: 16
+                        Layout.preferredWidth: root.close_button_image_size
+                        Layout.preferredHeight: root.close_button_image_size
+                        visible: root.showCloseButton
+                        btnImgNormal: root.close_button_image_Normal
+                        btnImgHovered: root.close_button_image_Hovered
+                        btnImgPressed: root.close_button_image_Pressed
+                        btnImgDisbaled: root.close_button_image_Disbaled
+                        onClicked: {
+                            if(removetimer.running)
+                            {
+                                removetimer.stop()
+                            }
+                            baseMessageItem.removeindex = baseMessageItem.currentindex
+                            baseMessageItem.removeupdateCoordinate()
+                        }
                     }
                 }
 
                 Component.onDestruction: {
-                    console.log("dest: " + currentindex)
+
                 }
 
                 Component.onCompleted: {
@@ -197,7 +220,6 @@ Item {
                     }
 
                     onFinished: {
-                        console.log("messageModel.count: " + messageModel.count)
                         if(removetimer.running)
                         {
                             removetimer.stop()
@@ -226,10 +248,9 @@ Item {
                     }
 
                     onFinished: {
-                        console.log("messageModel.count: " + messageModel.count)
                         if(messageModel.count > 0)
                         {
-                            listview.model.remove(0)
+                            listview.model.remove(baseMessageItem.removeindex)
                             if(removetimer.running)
                             {
                                 removetimer.stop()
@@ -452,7 +473,7 @@ Item {
                 Connections {
                     target: removetimer
                     function onRemoveTrigered(removeindex) {
-                        console.log("baseMessageItem.currentindex: " + baseMessageItem.currentindex)
+                        baseMessageItem.removeindex = removeindex
                         if(removeindex === baseMessageItem.currentindex)
                         {
                             baseMessageItem.removeupdateCoordinate()
