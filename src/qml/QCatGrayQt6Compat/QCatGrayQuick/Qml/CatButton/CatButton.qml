@@ -81,12 +81,18 @@ Button{
         onPositionChanged: function(mouse){ mouse.accepted = false;}
         onPressed:  function(mouse){
             root.ispressed = true
-            //mouse.accepted = false;
+            if(selected)
+            {
+                mouse.accepted = false;
+            }
         }
         onPressAndHold: function(mouse){ mouse.accepted = false; }
         onClicked: function(mouse){
             parent.clicked()
-            mouse.accepted = false;
+            if(selected)
+            {
+                mouse.accepted = false;
+            }
         }
         onReleased: function(mouse){
             root.ispressed = false

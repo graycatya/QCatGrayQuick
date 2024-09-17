@@ -81,7 +81,10 @@ Button{
         onPositionChanged: { mouse.accepted = false;}
         onPressed:  {
             root.ispressed = true
-            //mouse.accepted = false;
+            if(selected)
+            {
+                mouse.accepted = false;
+            }
         }
         onPressAndHold: { mouse.accepted = false; }
         onClicked:  {
@@ -90,7 +93,10 @@ Button{
         }
         onReleased: {
             root.ispressed = false
-            //mouse.accepted = false;
+            if(selected)
+            {
+                mouse.accepted = false;
+            }
         }
         onWheel: { wheel.accepted = false; }
         onEntered: { buttonEntered() }
