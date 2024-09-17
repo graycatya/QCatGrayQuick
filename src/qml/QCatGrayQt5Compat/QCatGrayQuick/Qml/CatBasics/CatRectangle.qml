@@ -13,9 +13,7 @@ Rectangle {
     property color backdropColor: "#FFFFFF"
     property real borderWidth: 0
     property color borderColor: "transparent"
-
-    property real radius: 0
-
+    
     color: "transparent"
     border.color: "transparent"
     border.width: 0
