@@ -1,4 +1,4 @@
-#include "QCatGrayQuickTableViewModel.h"
+﻿#include "QCatGrayQuickTableViewModel.h"
 #include <QQmlEngine>
 #include <QGuiApplication>
 #include <QCursor>
@@ -59,6 +59,14 @@ QCatGrayQuickTableViewModelStruct *QCatGrayQuickTableViewModel::appendStruct(QJs
     endInsertRows();
     emit tabledataChanged();
     return t_struct;
+}
+
+void QCatGrayQuickTableViewModel::updateStruct(int index, QJsonObject object)
+{
+    if(index >= 0 && index < m_StructList.count())
+    {
+        m_StructList.at(index)->setdata(object);
+    }
 }
 
 QCatGrayQuickTableViewModelStruct *QCatGrayQuickTableViewModel::getStruct(int index)
