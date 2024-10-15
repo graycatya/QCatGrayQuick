@@ -53,7 +53,19 @@ QCatGrayQuickTableViewModelStruct *QCatGrayQuickTableViewModel::appendStruct(QJs
             t_struct, &QCatGrayQuickTableViewModelStruct::setMinimumHeight);
     connect(this, &QCatGrayQuickTableViewModel::setAllItemMaximumHeighted,
             t_struct, &QCatGrayQuickTableViewModelStruct::setMaximumHeight);
+    connect(this, &QCatGrayQuickTableViewModel::preferredItemHeightChanged,t_struct, [=](){
+        t_struct->setPreferredHeight(m_PreferredItemHeight);
+    });
+    connect(this, &QCatGrayQuickTableViewModel::minimumItemHeightChanged,t_struct, [=](){
+        t_struct->setMinimumHeight(m_MinimumItemHeight);
+    });
+    connect(this, &QCatGrayQuickTableViewModel::maximumItemHeightChanged,t_struct, [=](){
+        t_struct->setMaximumHeight(m_MaximumItemHeight);
+    });
     t_struct->setdata(object);
+    t_struct->setMaximumHeight(m_MaximumItemHeight);
+    t_struct->setMinimumHeight(m_MinimumItemHeight);
+    t_struct->setPreferredHeight(m_PreferredItemHeight);
     beginInsertRows(QModelIndex(), m_StructList.count(), m_StructList.count());
     m_StructList.insert(m_StructList.count(), QSharedPointer<QCatGrayQuickTableViewModelStruct>(t_struct));
     endInsertRows();
@@ -279,6 +291,51 @@ void QCatGrayQuickTableViewModel::setInteractive(bool interactive)
         m_Interactive = interactive;
         emit interactiveChanged();
     }
+}
+
+void QCatGrayQuickTableViewModel::setPreferredItemHeight(int height)
+{
+    if(m_PreferredItemHeight != height)
+    {
+        m_PreferredItemHeight = height;
+        if(m_PreferredItemHeight < m_MinimumItemHeight)
+        {
+            m_PreferredItemHeight = m_MinimumItemHeight;
+        }
+        if(m_PreferredItemHeight > m_MaximumItemHeight)
+        {
+            m_PreferredItemHeight = m_MaximumItemHeight;
+        }
+        emit preferredItemHeightChanged();
+    }
+}
+
+void QCatGrayQuickTableViewModel::setMinimumItemHeight(int height)
+{
+        if(m_MinimumItemHeight != height)
+        {
+            m_MinimumItemHeight = height;
+            if(m_PreferredItemHeight < m_MinimumItemHeight)
+            {
+                m_PreferredItemHeight = m_MinimumItemHeight;
+                emit preferredItemHeightChanged();
+            }
+            emit minimumItemHeightChanged();
+        }
+}
+
+void QCatGrayQuickTableViewModel::setMaximumItemHeight(int height)
+{
+        if(m_MaximumItemHeight != height)
+        {
+            m_MaximumItemHeight = height;
+            if(m_PreferredItemHeight > m_MaximumItemHeight)
+            {
+                m_PreferredItemHeight = m_MaximumItemHeight;
+                emit preferredItemHeightChanged();
+            }
+            emit maximumItemHeightChanged();
+        }
 }
 
 void QCatGrayQuickTableViewModel::InitConnect()

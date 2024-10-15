@@ -13,6 +13,9 @@ class QCatGrayQuickTableViewModel : public QAbstractListModel
     Q_PROPERTY(int preferredHeaderHeight READ preferredHeaderHeight WRITE setPreferredHeaderHeight NOTIFY preferredHeaderHeightChanged)
     Q_PROPERTY(int minimumHeaderHeight READ minimumHeaderHeight WRITE setMinimumHeaderHeight NOTIFY minimumHeaderHeightChanged)
     Q_PROPERTY(int maximumHeaderHeight READ maximumHeaderHeight WRITE setMaximumHeaderHeight NOTIFY maximumHeaderHeightChanged)
+    Q_PROPERTY(int preferredItemHeight READ preferredItemHeight WRITE setPreferredItemHeight NOTIFY preferredItemHeightChanged)
+    Q_PROPERTY(int minimumItemHeight READ minimumItemHeight WRITE setMinimumItemHeight NOTIFY minimumItemHeightChanged)
+    Q_PROPERTY(int maximumItemHeight READ maximumItemHeight WRITE setMaximumItemHeight NOTIFY maximumItemHeightChanged)
     Q_PROPERTY(int flickableWidth READ flickableWidth WRITE setFlickableWidth NOTIFY flickableWidthChanged)
     Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged)
 public:
@@ -66,6 +69,22 @@ public:
     Q_INVOKABLE bool interactive() const { return m_Interactive; }
     Q_INVOKABLE void setInteractive(bool interactive);
 
+    Q_INVOKABLE void setPreferredItemHeight(int height);
+    Q_INVOKABLE void setMinimumItemHeight(int height);
+    Q_INVOKABLE void setMaximumItemHeight(int height);
+
+    int preferredItemHeight() const {
+        return m_PreferredItemHeight;
+    }
+
+    int minimumItemHeight() const {
+        return m_MinimumItemHeight;
+    }
+
+    int maximumItemHeight() const {
+        return m_MaximumItemHeight;
+    }
+
 private:
     void InitConnect();
 
@@ -91,6 +110,10 @@ signals:
 
     void interactiveChanged();
 
+    void preferredItemHeightChanged();
+    void minimumItemHeightChanged();
+    void maximumItemHeightChanged();
+
 private:
     QList<QSharedPointer<QCatGrayQuickTableViewModelStruct>> m_StructList;
     QList<QSharedPointer<QCatGrayQuickTableViewHeaderStruct>> m_headerStruct;
@@ -98,6 +121,9 @@ private:
     int m_PreferredHeaderHeight = 30;
     int m_MinimumHeaderHeight = 30;
     int m_MaximumHeaderHeight = 30;
+    int m_PreferredItemHeight = 30;
+    int m_MinimumItemHeight = 30;
+    int m_MaximumItemHeight = 30;
     int m_FlickableWidth = 0;
     bool m_Interactive = true;
 };
