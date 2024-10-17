@@ -73,6 +73,35 @@ QCatGrayQuickTableViewModelStruct *QCatGrayQuickTableViewModel::appendStruct(QJs
     return t_struct;
 }
 
+QCatGrayQuickTableViewModelStruct *QCatGrayQuickTableViewModel::appendStructObject(QObject *object)
+{
+    QCatGrayQuickTableViewModelStruct *t_struct = new QCatGrayQuickTableViewModelStruct(this);
+    connect(this, &QCatGrayQuickTableViewModel::setAllItemPreferredHeighted,
+            t_struct, &QCatGrayQuickTableViewModelStruct::setPreferredHeight);
+    connect(this, &QCatGrayQuickTableViewModel::setAllItemMinimumHeighted,
+            t_struct, &QCatGrayQuickTableViewModelStruct::setMinimumHeight);
+    connect(this, &QCatGrayQuickTableViewModel::setAllItemMaximumHeighted,
+            t_struct, &QCatGrayQuickTableViewModelStruct::setMaximumHeight);
+    connect(this, &QCatGrayQuickTableViewModel::preferredItemHeightChanged,t_struct, [=](){
+        t_struct->setPreferredHeight(m_PreferredItemHeight);
+    });
+    connect(this, &QCatGrayQuickTableViewModel::minimumItemHeightChanged,t_struct, [=](){
+        t_struct->setMinimumHeight(m_MinimumItemHeight);
+    });
+    connect(this, &QCatGrayQuickTableViewModel::maximumItemHeightChanged,t_struct, [=](){
+        t_struct->setMaximumHeight(m_MaximumItemHeight);
+    });
+    t_struct->setDataObject(object);
+    t_struct->setMaximumHeight(m_MaximumItemHeight);
+    t_struct->setMinimumHeight(m_MinimumItemHeight);
+    t_struct->setPreferredHeight(m_PreferredItemHeight);
+    beginInsertRows(QModelIndex(), m_StructList.count(), m_StructList.count());
+    m_StructList.insert(m_StructList.count(), QSharedPointer<QCatGrayQuickTableViewModelStruct>(t_struct));
+    endInsertRows();
+    emit tabledataChanged();
+    return t_struct;
+}
+
 void QCatGrayQuickTableViewModel::updateStruct(int index, QJsonObject object)
 {
     if(index >= 0 && index < m_StructList.count())

@@ -14,6 +14,8 @@ Rectangle {
     property bool freezeHeader: true
     property int columnfreezeNum: 0
     property int leftbottomfreezeNum: 0
+    property alias horizontalScrollBar: tablehorizontalScrollBar
+    property alias verticalScrollBar: tableverticalScrollBar
 
     color: "transparent"
     //clip: true

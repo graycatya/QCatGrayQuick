@@ -26,6 +26,7 @@ public:
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     Q_INVOKABLE QCatGrayQuickTableViewModelStruct* appendStruct(QJsonObject object);
+    Q_INVOKABLE QCatGrayQuickTableViewModelStruct* appendStructObject(QObject* object);
     Q_INVOKABLE void updateStruct(int index, QJsonObject object);
     Q_INVOKABLE QCatGrayQuickTableViewModelStruct* getStruct(int index);
     Q_INVOKABLE int getStructSize();

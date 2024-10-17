@@ -66,3 +66,12 @@ void QCatGrayQuickTableViewModelStruct::setMaximumHeight(int height)
         emit maximumHeightChanged();
     }
 }
+
+void QCatGrayQuickTableViewModelStruct::setDataObject(QObject *object)
+{
+    if(m_pDataObject != object)
+    {
+        m_pDataObject = object;
+        emit dataObjectChanged();
+    }
+}

@@ -8,8 +8,9 @@
 class QCatGrayQuickTableViewModelStruct : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QJsonObject data READ data WRITE setdata NOTIFY dataChanged FINAL)
-    Q_PROPERTY(int length READ length NOTIFY lengthChanged FINAL)
+    Q_PROPERTY(QObject* dataObject READ dataObject WRITE setDataObject NOTIFY dataObjectChanged)
+    Q_PROPERTY(QJsonObject data READ data WRITE setdata NOTIFY dataChanged)
+    Q_PROPERTY(int length READ length NOTIFY lengthChanged)
     Q_PROPERTY(int preferredHeight READ preferredHeight WRITE setPreferredHeight NOTIFY preferredHeightChanged)
     Q_PROPERTY(int minimumHeight READ minimumHeight WRITE setMinimumHeight NOTIFY minimumHeightChanged)
     Q_PROPERTY(int maximumHeight READ maximumHeight WRITE setMaximumHeight NOTIFY maximumHeightChanged)
@@ -41,15 +42,23 @@ public:
     int maximumHeight() const { return m_MaximumHeight; }
     void setMaximumHeight(int height);
 
+    Q_INVOKABLE void setDataObject(QObject* object);
+
+    QObject* dataObject() const {
+        return m_pDataObject;
+    }
+
 signals:
     void dataChanged();
     void lengthChanged();
     void preferredHeightChanged();
     void minimumHeightChanged();
     void maximumHeightChanged();
+    void dataObjectChanged();
 
 
 protected:
+    QObject* m_pDataObject = nullptr;
     QJsonObject m_Data;
     int m_PreferredHeight = 30;
     int m_MinimumHeight = 30;
