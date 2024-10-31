@@ -27,7 +27,7 @@ public:
     Q_INVOKABLE void clearModel();
 
 
-private:
+protected:
 
     QList<QSharedPointer<QCatGrayChatStruct>> m_ChatStructList;
 };
