@@ -11,9 +11,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (UNIX)
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+elseif (UNIX)
 add_compile_options(-Wall -fPIC -Wno-stringop-overflow)
-endif(UNIX)
+endif()
 
 message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
 
