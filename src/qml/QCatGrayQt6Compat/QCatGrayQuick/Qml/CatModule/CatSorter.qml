@@ -240,6 +240,9 @@ Item {
         {
             currentPage = totalPage;
             updateCurrentPage(currentPage);
+        } else if(currentPage < 1 && totalPage > 0) {
+            currentPage = 1;
+            updateCurrentPage(currentPage);
         }
     }
 
